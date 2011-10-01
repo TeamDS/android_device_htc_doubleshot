@@ -58,8 +58,8 @@ PRODUCT_PACKAGES += \
     gralloc.msm8660 \
     copybit.msm8660 \
     overlay.default \
-    lights.msm8660 \
-    liboverlay \
+    lights.doubleshot \
+    liboverlay 
 
     # libOmxCore \
     # libOmxVenc \
