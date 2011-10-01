@@ -89,5 +89,3 @@ key 215   AT
 # On an AT keyboard: ESC, F10
 key 1     BACK              WAKE_DROPPED
 key 68    MENU              WAKE_DROPPED
-# Add TV KEY for Hua/Huang
-key 377   TV    WAKE_DROPPED
