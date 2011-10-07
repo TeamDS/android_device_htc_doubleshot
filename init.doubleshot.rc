@@ -185,6 +185,15 @@ service udhcpd /system/bin/udhcpd
 service rmt_storage /system/bin/rmt_storage /dev/block/mmcblk0p25 /dev/block/mmcblk0p26 /dev/block/mmcblk0p18
     user root
     disabled
+
+service htc_ebdlogd /system/bin/htc_ebdlogd -s -k -P 7
+    user root
+    disabled
+    oneshot
+
+service htc_ebdlogd_rel /system/bin/htc_ebdlogd -s -k
+    user root
+    disabled
     oneshot
     
 on property:ro.build.tags=test-keys
@@ -243,7 +252,7 @@ service dcvs1 /system/bin/dcvs --cpu=1 --slacktime=16
     user root
     disabled
 
-service mpdecision /system/bin/mpdecision --no_sleep --avg_comp
+service mpdecision /system/bin/mpdecision --Nw 5.4 --Ts 350 --no_sleep --avg_comp --single_core_while_panel_off
     user root
     disabled
 

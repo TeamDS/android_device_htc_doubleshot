@@ -2,6 +2,7 @@ USE_CAMERA_STUB := false
 
 # inherit from the proprietary version
 -include vendor/htc/doubleshot/BoardConfigVendor.mk
+
 TARGET_SPECIFIC_HEADER_PATH := device/htc/doubleshot/include 
 
 TARGET_NO_BOOTLOADER := true
@@ -46,11 +47,11 @@ BOARD_EGL_CFG := device/htc/doubleshot/egl.cfg
 
 BOARD_USES_QCOM_LIBS := true
 BOARD_USES_QCOM_LIBRPC := true
-#BOARD_USES_QCOM_GPS := true
+BOARD_USES_QCOM_GPS := true
 BOARD_USE_QCOM_PMEM := true
 BOARD_CAMERA_USE_GETBUFFERINFO := true
 BOARD_HAVE_HTC_FFC := true
-BOARD_USE_REVERSE_FFC := true
+#BOARD_USE_REVERSE_FFC := true
 
 
 BOARD_OVERLAY_FORMAT_YCbCr_420_SP := true
@@ -72,6 +73,7 @@ TARGET_USE_SCORPION_BIONIC_OPTIMIZATION := true
 
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := doubleshot
 BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 50000
+BOARD_USES_GPSSHIM := false
 
 TARGET_USES_C2D_COMPOSITION := true
 TARGET_HAVE_HDMI_OUT := true
@@ -113,3 +115,6 @@ BOARD_USES_MMCUTILS := true
 BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_CUSTOM_GRAPHICS:= ../../../device/htc/doubleshot/graphics.c
 BOARD_USES_RECOVERY_CHARGEMODE := true
+
+BOARD_HTCBATT := device/htc/doubleshot/htcbatt
+BOARD_NEEDS_CUTILS_LOG := true

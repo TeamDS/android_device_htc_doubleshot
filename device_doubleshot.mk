@@ -47,9 +47,11 @@ PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
     frameworks/base/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
     frameworks/base/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
+    frameworks/base/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
     frameworks/base/data/etc/android.hardware.sensor.compass.xml:system/etc/permissions/android.hardware.sensor.compass.xml \
     frameworks/base/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
     frameworks/base/data/etc/android.hardware.touchscreen.multitouch.distinct.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.distinct.xml \
+    frameworks/base/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
     frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
     frameworks/base/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml
 
@@ -59,7 +61,9 @@ PRODUCT_PACKAGES += \
     copybit.msm8660 \
     overlay.default \
     lights.doubleshot \
-    liboverlay 
+    gps.doubleshot \
+    liboverlay \
+    com.android.future.usb.accessory
 
     # libOmxCore \
     # libOmxVenc \
@@ -125,8 +129,8 @@ PRODUCT_COPY_FILES += \
     device/htc/doubleshot/modules/bcm4329.ko:system/lib/modules/bcm4329.ko
 
 # Wifi Calling
-PRODUCT_COPY_FILES += \
-    device/htc/doubleshot/prebuilt/MS-HTCDP-KNT20-02-A0-GB.apk:/system/app/MS-HTCDP-KNT20-02-A0-GB.apk
+#PRODUCT_COPY_FILES += \
+#    device/htc/doubleshot/prebuilt/MS-HTCDP-KNT20-02-A0-GB.apk:/system/app/MS-HTCDP-KNT20-02-A0-GB.apk
 
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
