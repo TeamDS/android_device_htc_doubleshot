@@ -62,6 +62,7 @@ PRODUCT_PACKAGES += \
     overlay.default \
     lights.doubleshot \
     gps.doubleshot \
+    sensors.doubleshot \
     liboverlay \
     com.android.future.usb.accessory
 
