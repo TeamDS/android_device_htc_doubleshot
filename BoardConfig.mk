@@ -24,6 +24,9 @@ TARGET_HAVE_TSLIB := false
 TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
 
+BOARD_CUSTOM_USB_CONTROLLER := ../../device/htc/doubleshot/UsbController.cpp
+
+
 # Wifi related defines
 BOARD_WPA_SUPPLICANT_DRIVER := WEXT
 WPA_SUPPLICANT_VERSION      := VER_0_6_X
@@ -116,5 +119,6 @@ BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_CUSTOM_GRAPHICS:= ../../../device/htc/doubleshot/graphics.c
 BOARD_USES_RECOVERY_CHARGEMODE := true
 
+TARGET_PREBUILT_RECOVERY_KERNEL := device/htc/doubleshot/recovery_kernel
 BOARD_HTCBATT := device/htc/doubleshot/htcbatt
 BOARD_NEEDS_CUTILS_LOG := true
