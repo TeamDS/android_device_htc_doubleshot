@@ -18,6 +18,15 @@
 PRODUCT_COPY_FILES += \
     device/htc/doubleshot/gps.conf:system/etc/gps.conf
 
+## recovery and custom charging
+PRODUCT_COPY_FILES += \
+    device/htc/doubleshot/prebuilt/init:recovery/root/init \
+    device/htc/doubleshot/recovery/sbin/choice_fn:recovery/root/sbin/choice_fn \
+    device/htc/doubleshot/recovery/sbin/power_test:recovery/root/sbin/power_test \
+    device/htc/doubleshot/recovery/sbin/offmode_charging:recovery/root/sbin/offmode_charging \
+    device/htc/doubleshot/recovery/sbin/detect_key:recovery/root/sbin/detect_key \
+    device/htc/doubleshot/recovery/sbin/htcbatt:recovery/root/sbin/htcbatt
+
 ## (1) First, the most specific values, i.e. the aspects that are specific to GSM
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=240 \

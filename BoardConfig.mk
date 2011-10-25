@@ -55,7 +55,6 @@ BOARD_USE_QCOM_PMEM := true
 BOARD_CAMERA_USE_GETBUFFERINFO := true
 BOARD_HAVE_HTC_FFC := true
 #BOARD_USE_REVERSE_FFC := true
-
 BOARD_CAMERA_USE_ENCODEDATA := true
 
 BOARD_OVERLAY_FORMAT_YCbCr_420_SP := true
@@ -81,7 +80,6 @@ BOARD_USES_GPSSHIM := false
 
 TARGET_USES_C2D_COMPOSITION := true
 TARGET_HAVE_HDMI_OUT := true
-#TARGET_HARDWARE_3D := true
 
 # Define Prebuilt kernel locations
 TARGET_PREBUILT_KERNEL := device/htc/doubleshot/kernel
@@ -117,9 +115,8 @@ BOARD_SDCARD_DEVICE_SECONDARY := /dev/block/mmcblk1
 BOARD_SDEXT_DEVICE := /dev/block/mmcblk1p2
 BOARD_USES_MMCUTILS := true
 BOARD_HAS_NO_MISC_PARTITION := true
-BOARD_CUSTOM_GRAPHICS:= ../../../device/htc/doubleshot/graphics.c
-BOARD_USES_RECOVERY_CHARGEMODE := true
 
-TARGET_PREBUILT_RECOVERY_KERNEL := device/htc/doubleshot/recovery_kernel
-BOARD_HTCBATT := device/htc/doubleshot/htcbatt
+TARGET_RECOVERY_INITRC := device/htc/doubleshot/recovery/init.rc
+BOARD_CUSTOM_GRAPHICS:= ../../../device/htc/doubleshot/recovery/graphics.c
+
 BOARD_NEEDS_CUTILS_LOG := true
