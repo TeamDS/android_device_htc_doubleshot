@@ -139,8 +139,8 @@ PRODUCT_COPY_FILES += \
     device/htc/doubleshot/modules/bcm4329.ko:system/lib/modules/bcm4329.ko
 
 # Wifi Calling
-#PRODUCT_COPY_FILES += \
-#    device/htc/doubleshot/prebuilt/MS-HTCDP-KNT20-02-A0-GB.apk:/system/app/MS-HTCDP-KNT20-02-A0-GB.apk
+PRODUCT_COPY_FILES += \
+    device/htc/doubleshot/prebuilt/HTC-DPM-GB.apk:/system/app/HTC-DPM-GB.apk
 
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
