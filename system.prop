@@ -3,6 +3,10 @@
 
 debug.fb.rgb565=0
 
+#copybit_bypass
+debug.sf.hw=1
+debug.overlayui.enable=0
+
 #C2D
 debug.composition.type = c2d
 
