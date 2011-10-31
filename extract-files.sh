@@ -100,6 +100,7 @@ adb pull /system/lib/libqdp.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libqmi.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libqmiservices.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/librilswitch.so ../../../vendor/htc/$DEVICE/proprietary
+adb pull /system/lib/libwebkitaccel.so ../../vendor/htc/$DEVICE/proprietary
 
 adb pull /system/lib/hw/gps.doubleshot.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/hw/sensors.doubleshot.so ../../../vendor/htc/$DEVICE/proprietary
@@ -194,6 +195,7 @@ PRODUCT_COPY_FILES += \\
     vendor/htc/__DEVICE__/proprietary/libhtc_ril.so:/system/lib/libhtc_ril.so \\
     vendor/htc/__DEVICE__/proprietary/libidl.so:/system/lib/libidl.so \\
     vendor/htc/__DEVICE__/proprietary/librilswitch.so:/system/lib/librilswitch.so \\
+    vendor/htc/__DEVICE__/proprietary/libwebkitaccel.so:/system/lib/libwebkitaccel.so \\
     vendor/htc/__DEVICE__/proprietary/libganril.so:/system/lib/libganril.so \\
     vendor/htc/__DEVICE__/proprietary/libkineto.so:/system/lib/libkineto.so \\
     vendor/htc/__DEVICE__/proprietary/libmmipl.so:/system/lib/libmmipl.so \\
