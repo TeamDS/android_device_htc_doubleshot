@@ -102,7 +102,6 @@ adb pull /system/lib/libqmiservices.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/librilswitch.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libwebkitaccel.so ../../vendor/htc/$DEVICE/proprietary
 
-adb pull /system/lib/hw/gps.doubleshot.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/hw/sensors.doubleshot.so ../../../vendor/htc/$DEVICE/proprietary
 
 (cat << EOF) | sed s/__DEVICE__/$DEVICE/g > ../../../vendor/htc/$DEVICE/$DEVICE-vendor-blobs.mk
@@ -207,6 +206,7 @@ PRODUCT_COPY_FILES += \\
     vendor/htc/__DEVICE__/proprietary/libqdp.so:/system/lib/libqdp.so \\
     vendor/htc/__DEVICE__/proprietary/libqmi.so:/system/lib/libqmi.so \\
     vendor/htc/__DEVICE__/proprietary/libqmiservices.so:/system/lib/libqmiservices.so \\
+    vendor/htc/__DEVICE__/proprietary/sensors.doubleshot.so:/system/lib/hw/sensors.doubleshot.so \\ 
     vendor/htc/__DEVICE__/proprietary/vpimg:/system/etc/vpimg
 EOF
 
