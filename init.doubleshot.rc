@@ -1,3 +1,12 @@
+
+
+on boot
+    mount debugfs /sys/kernel/debug /sys/kernel/debug
+
+    service post-boot /system/bin/sh /system/etc/init.post_boot.sh
+    user root
+    oneshot
+
 on early-fs
     mkdir /system
     mkdir /data 0771 system system
@@ -40,15 +49,21 @@ on fs
     symlink /vendor/firmware/misc/modem.b00 /vendor/firmware/modem.b00
     symlink /vendor/firmware/misc/modem.mdt /vendor/firmware/modem.mdt
 
-on init
+
     # double check the perms and set owner
     chown root root /devlog
     chmod 0700 /devlog
 
-on boot
-# + SSD_RIL: Otis: from Qualcomm QMI and Netmgrd
+	mount rootfs rootfs / remount
+
+    #for CIQ ipc
+    mkdir /app-cache/ciq 0711 root system
+    mkdir /app-cache/ciq/socket 0777 root system
+
     mkdir /data/radio 0770 radio radio
-# - SSD_RIL: Otis: from Qualcomm QMI and Netmgrd
+
+    #wifi
+    mkdir /data/misc 1771 system misc
     mkdir /data/misc/wifi 0770 wifi wifi
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
     mkdir /data/misc/dhcp 0770 dhcp dhcp

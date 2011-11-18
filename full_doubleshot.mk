@@ -38,7 +38,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.dexopt-flags=m=y
 
 PRODUCT_COPY_FILES += \
-    device/htc/doubleshot/init.rc:root/init.rc \
     device/htc/doubleshot/init.doubleshot.rc:root/init.doubleshot.rc \
     device/htc/doubleshot/ueventd.doubleshot.rc:root/ueventd.doubleshot.rc
 
@@ -61,6 +60,7 @@ PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
     frameworks/base/data/etc/android.hardware.touchscreen.multitouch.distinct.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.distinct.xml \
     frameworks/base/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
+    frameworks/base/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
     frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
     frameworks/base/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml
 
@@ -69,12 +69,13 @@ PRODUCT_PACKAGES += \
     gralloc.msm8660 \
     copybit.msm8660 \
     overlay.default \
-    lights.doubleshot \
     gps.doubleshot \
     liboverlay \
-    com.android.future.usb.accessory
+    com.android.future.usb.accessory \
+    libaudio
 
     # sensors.doubleshot \
+    # lights.doubleshot \
     # libOmxCore \
     # libOmxVenc \
     # libOmxVdec \
@@ -138,9 +139,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/htc/doubleshot/modules/bcm4329.ko:system/lib/modules/bcm4329.ko
 
-# Wifi Calling
-PRODUCT_COPY_FILES += \
-    device/htc/doubleshot/prebuilt/HTC-DPM-GB.apk:/system/app/HTC-DPM-GB.apk
+### Wifi Calling
+##BUILD_PREBUILT += \
+    ##device/htc/doubleshot/prebuilt/HTC-DPM-GB.apk:/system/app/HTC-DPM-GB.apk
 
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
@@ -176,12 +177,13 @@ $(call inherit-product, device/htc/doubleshot/media_a1026.mk)
 # htc audio settings
 $(call inherit-product, device/htc/doubleshot/media_htcaudio.mk)
 
-# stuff common to all HTC phones
-$(call inherit-product, device/htc/common/common.mk)
+### stuff common to all HTC phones
+##$(call inherit-product, device/htc/common/common.mk)
 
 $(call inherit-product, build/target/product/full_base.mk)
 
-PRODUCT_NAME := HTC Doubleshot
+#PRODUCT_NAME := HTC Doubleshot
+PRODUCT_NAME := full_doubleshot
 PRODUCT_DEVICE := doubleshot
 PRODUCT_MODEL := myTouch_4G_Slide
 PRODUCT_MANUFACTURER := HTC

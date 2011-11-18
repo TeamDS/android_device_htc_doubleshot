@@ -22,6 +22,7 @@ adb pull /system/bin/akmd ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/bin/awb_camera ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/bin/bma150_usr ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/bin/btld ../../../vendor/htc/$DEVICE/proprietary
+adb pull /system/bin/cam_ins_spmo ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/bin/charging ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/bin/dcvs ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/bin/dcvsd ../../../vendor/htc/$DEVICE/proprietary
@@ -54,12 +55,12 @@ adb pull /system/lib/egl/libGLESv1_CM_adreno200.so ../../../vendor/htc/$DEVICE/p
 adb pull /system/lib/egl/libGLESv2_adreno200.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/egl/libq3dtools_adreno200.so ../../../vendor/htc/$DEVICE/proprietary
 
+adb pull /system/lib/libaudio.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libaudioalsa.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libacdbloader.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libaudcal.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libC2D2.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libcamera.so ../../../vendor/htc/$DEVICE/proprietary
-adb pull /system/lib/libcamera_client.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libchromatix_imx105_default_video.so  ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libchromatix_imx105_preview.so  ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libchromatix_imx105_zsl.so  ../../../vendor/htc/$DEVICE/proprietary
@@ -85,23 +86,29 @@ adb pull /system/lib/libganril.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libgsl.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libhtc_acoustic.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libhtc_ril.so ../../../vendor/htc/$DEVICE/proprietary
+adb pull /system/lib/libhtc_ril_switch.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libidl.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libkineto.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libmmipl.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libmmjpeg.so ../../../vendor/htc/$DEVICE/proprietary
+adb pull /system/lib/libmm-omxcore.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libnetmgr.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/liboemcamera.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libOmxCore.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libOmxVdec.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libOmxVenc.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libOpenVG.so ../../../vendor/htc/$DEVICE/proprietary
+adb pull /system/lib/liboverlay.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libposteffect.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libqdp.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libqmi.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libqmiservices.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/librilswitch.so ../../../vendor/htc/$DEVICE/proprietary
+adb pull /system/lib/libril.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/libwebkitaccel.so ../../../vendor/htc/$DEVICE/proprietary
 
+adb pull /system/lib/hw/gralloc.msm8660.so ../../../vendor/htc/$DEVICE/proprietary
+adb pull /system/lib/hw/lights.msm8660.so ../../../vendor/htc/$DEVICE/proprietary
 adb pull /system/lib/hw/sensors.doubleshot.so ../../../vendor/htc/$DEVICE/proprietary
 
 (cat << EOF) | sed s/__DEVICE__/$DEVICE/g > ../../../vendor/htc/$DEVICE/$DEVICE-vendor-blobs.mk
@@ -123,8 +130,11 @@ adb pull /system/lib/hw/sensors.doubleshot.so ../../../vendor/htc/$DEVICE/propri
 
 # Prebuilt libraries that are needed to build open-source libraries
 PRODUCT_COPY_FILES += \\
+    vendor/htc/__DEVICE__/proprietary/libaudio.so:obj/lib/libaudio.so \\
     vendor/htc/__DEVICE__/proprietary/libcamera.so:obj/lib/libcamera.so \\
-    vendor/htc/__DEVICE__/proprietary/libaudioalsa.so:obj/lib/libaudioalsa.so
+    vendor/htc/__DEVICE__/proprietary/libaudioalsa.so:obj/lib/libaudioalsa.so \\
+    vendor/htc/__DEVICE__/proprietary/libwebkitaccel.so:obj/lib/libwebkitaccel.so \\
+    vendor/htc/__DEVICE__/proprietary/libril.so:obj/lib/libril.so
 
 # All the blobs necessary for doubleshot
 PRODUCT_COPY_FILES += \\
@@ -133,6 +143,7 @@ PRODUCT_COPY_FILES += \\
     vendor/htc/__DEVICE__/proprietary/awb_camera:/system/bin/awb_camera \\
     vendor/htc/__DEVICE__/proprietary/bma150_usr:/system/bin/bma150_usr \\
     vendor/htc/__DEVICE__/proprietary/btld:/system/bin/btld \\
+    vendor/htc/__DEVICE__/proprietary/cam_ins_spmo:/system/bin/cam_ins_spmo \\
     vendor/htc/__DEVICE__/proprietary/charging:/system/bin/charging \\
     vendor/htc/__DEVICE__/proprietary/dcvs:/system/bin/dcvs \\
     vendor/htc/__DEVICE__/proprietary/dcvsd:/system/bin/dcvsd \\
@@ -163,12 +174,12 @@ PRODUCT_COPY_FILES += \\
     vendor/htc/__DEVICE__/proprietary/libOmxVdec.so:/system/lib/libOmxVdec.so \\
     vendor/htc/__DEVICE__/proprietary/libOmxCore.so:/system/lib/libOmxCore.so \\
     vendor/htc/__DEVICE__/proprietary/libOmxVenc.so:/system/lib/libOmxVenc.so \\
+    vendor/htc/__DEVICE__/proprietary/libaudio.so:/system/lib/libaudioal.so \\
     vendor/htc/__DEVICE__/proprietary/libaudioalsa.so:/system/lib/libaudioalsa.so \\
     vendor/htc/__DEVICE__/proprietary/libaudcal.so:/system/lib/libaudcal.so \\
     vendor/htc/__DEVICE__/proprietary/libacdbloader.so:/system/lib/libacdbloader.so \\
     vendor/htc/__DEVICE__/proprietary/libC2D2.so:/system/lib/libC2D2.so \\
     vendor/htc/__DEVICE__/proprietary/libcamera.so:/system/lib/libcamera.so \\
-    vendor/htc/__DEVICE__/proprietary/libcamera_client.so:/system/lib/libcamera_client.so \\
     vendor/htc/__DEVICE__/proprietary/libchromatix_imx105_default_video.so:/system/lib/libchromatix_imx105_default_video.so \\
     vendor/htc/__DEVICE__/proprietary/libchromatix_imx105_preview.so:/system/lib/libchromatix_imx105_preview.so \\
     vendor/htc/__DEVICE__/proprietary/libchromatix_imx105_zsl.so:/system/lib/libchromatix_imx105_zsl.so \\
@@ -193,19 +204,25 @@ PRODUCT_COPY_FILES += \\
     vendor/htc/__DEVICE__/proprietary/libhtc_acoustic.so:/system/lib/libhtc_acoustic.so \\
     vendor/htc/__DEVICE__/proprietary/libhtc_ril.so:/system/lib/libhtc_ril.so \\
     vendor/htc/__DEVICE__/proprietary/libidl.so:/system/lib/libidl.so \\
+    vendor/htc/__DEVICE__/proprietary/libril.so:/system/lib/libril.so \\
+    vendor/htc/__DEVICE__/proprietary/libhtc_ril_switch.so:/system/lib/libhtc_ril_switch.so \\
     vendor/htc/__DEVICE__/proprietary/librilswitch.so:/system/lib/librilswitch.so \\
     vendor/htc/__DEVICE__/proprietary/libwebkitaccel.so:/system/lib/libwebkitaccel.so \\
     vendor/htc/__DEVICE__/proprietary/libganril.so:/system/lib/libganril.so \\
     vendor/htc/__DEVICE__/proprietary/libkineto.so:/system/lib/libkineto.so \\
     vendor/htc/__DEVICE__/proprietary/libmmipl.so:/system/lib/libmmipl.so \\
     vendor/htc/__DEVICE__/proprietary/libmmjpeg.so:/system/lib/libmmjpeg.so \\
+    vendor/htc/__DEVICE__/proprietary/libmm-omxcore.so:/system/lib/libmm-omxcore.so \\
     vendor/htc/__DEVICE__/proprietary/libnetmgr.so:/system/lib/libnetmgr.so \\
+    vendor/htc/__DEVICE__/proprietary/liboverlay.so:/system/lib/liboverlay.so \\
     vendor/htc/__DEVICE__/proprietary/libposteffect.so:/system/lib/libposteffect.so \\
     vendor/htc/__DEVICE__/proprietary/liboemcamera.so:/system/lib/liboemcamera.so \\
     vendor/htc/__DEVICE__/proprietary/libOpenVG.so:/system/lib/libOpenVG.so \\
     vendor/htc/__DEVICE__/proprietary/libqdp.so:/system/lib/libqdp.so \\
     vendor/htc/__DEVICE__/proprietary/libqmi.so:/system/lib/libqmi.so \\
     vendor/htc/__DEVICE__/proprietary/libqmiservices.so:/system/lib/libqmiservices.so \\
+    vendor/htc/__DEVICE__/proprietary/gralloc.msm8660.so:/system/lib/hw/gralloc.msm8660.so \\
+    vendor/htc/__DEVICE___proprietary/lights.msm8660.so:/system/lib/hw/lights.msm8660.so \\
     vendor/htc/__DEVICE__/proprietary/sensors.doubleshot.so:/system/lib/hw/sensors.doubleshot.so \\
     vendor/htc/__DEVICE__/proprietary/vpimg:/system/etc/vpimg
 EOF
