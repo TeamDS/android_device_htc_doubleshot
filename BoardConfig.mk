@@ -26,7 +26,6 @@ TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
 
 BOARD_CUSTOM_USB_CONTROLLER := ../../device/htc/doubleshot/UsbController.cpp
 
-
 # Wifi related defines
 BOARD_WPA_SUPPLICANT_DRIVER := WEXT
 WPA_SUPPLICANT_VERSION      := VER_0_6_X
@@ -39,8 +38,9 @@ WIFI_DRIVER_MODULE_NAME     := "bcm4329"
 
 # Audio 
 BOARD_USES_GENERIC_AUDIO := false
-BOARD_PREBUILT_LIBAUDIO := false
+BOARD_PREBUILT_LIBAUDIO := true
 BOARD_USES_AUDIO_LEGACY := true
+TARGET_PROVIDES_LIBAUDIO := true
 
 #Bluetooth
 BOARD_HAVE_BLUETOOTH := true
@@ -84,6 +84,7 @@ TARGET_USE_SCORPION_BIONIC_OPTIMIZATION := true
 
 # Define Prebuilt kernel locations
 TARGET_PREBUILT_KERNEL := device/htc/doubleshot/kernel
+TARGET_PROVIDES_INIT_RC := true
 
 # cat /proc/emmc
 # dev:        size     erasesize name
@@ -100,7 +101,6 @@ TARGET_PREBUILT_KERNEL := device/htc/doubleshot/kernel
 # mmcblk0p18: 007ffa00 00000200 "radio_config"
 # mmcblk0p25: 00400000 00000200 "modem_st1"
 # mmcblk0p26: 00400000 00000200 "modem_st2"
-
 
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 16777216

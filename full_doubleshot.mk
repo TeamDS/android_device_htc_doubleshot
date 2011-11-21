@@ -38,6 +38,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.dexopt-flags=m=y
 
 PRODUCT_COPY_FILES += \
+    device/htc/doubleshot/init.rc:root/init.rc \
     device/htc/doubleshot/init.doubleshot.rc:root/init.doubleshot.rc \
     device/htc/doubleshot/ueventd.doubleshot.rc:root/ueventd.doubleshot.rc
 
@@ -93,6 +94,7 @@ PRODUCT_COPY_FILES += \
     device/htc/doubleshot/keylayout/doubleshot-keypad.kl:system/usr/keylayout/doubleshot-keypad.kl \
     device/htc/doubleshot/keylayout/h2w_headset.kl:system/usr/keylayout/h2w_headset.kl \
     device/htc/doubleshot/keylayout/qwerty.kl:system/usr/keylayout/qwerty.kl \
+    device/htc/doubleshot/idc/atmel-touchscreen.idc:system/usr/idc/atmel-touchscreen.idc \
     device/htc/doubleshot/idc/synaptics-rmi-touchscreen.idc:system/usr/idc/synaptics-rmi-touchscreen.idc
 
 # Firmware
@@ -140,8 +142,8 @@ PRODUCT_COPY_FILES += \
     device/htc/doubleshot/modules/bcm4329.ko:system/lib/modules/bcm4329.ko
 
 ### Wifi Calling
-##BUILD_PREBUILT += \
-    ##device/htc/doubleshot/prebuilt/HTC-DPM-GB.apk:/system/app/HTC-DPM-GB.apk
+##PRODUCT_COPY_FILES += \
+##    device/htc/doubleshot/prebuilt/HTC-DPM-GB.apk:/system/app/HTC-DPM-GB.apk
 
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
@@ -180,6 +182,8 @@ $(call inherit-product, device/htc/doubleshot/media_htcaudio.mk)
 ### stuff common to all HTC phones
 ##$(call inherit-product, device/htc/common/common.mk)
 
+$(call inherit-product, build/target/product/locales_full.mk)
+$(call inherit-product, build/target/product/full.mk)
 $(call inherit-product, build/target/product/full_base.mk)
 
 #PRODUCT_NAME := HTC Doubleshot
