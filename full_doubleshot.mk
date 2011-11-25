@@ -182,9 +182,7 @@ $(call inherit-product, device/htc/doubleshot/media_htcaudio.mk)
 ### stuff common to all HTC phones
 ##$(call inherit-product, device/htc/common/common.mk)
 
-$(call inherit-product, build/target/product/locales_full.mk)
 $(call inherit-product, build/target/product/full.mk)
-$(call inherit-product, build/target/product/full_base.mk)
 
 #PRODUCT_NAME := HTC Doubleshot
 PRODUCT_NAME := full_doubleshot
