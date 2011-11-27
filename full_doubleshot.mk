@@ -18,6 +18,9 @@
 PRODUCT_COPY_FILES += \
     device/htc/doubleshot/gps.conf:system/etc/gps.conf
 
+PRODUCT_AAPT_CONFIG := normal hdpi
+PRODUCT_AAPT_PREF_CONFIG := hdpi
+
 ## recovery and custom charging
 PRODUCT_COPY_FILES += \
     device/htc/doubleshot/prebuilt/init:recovery/root/init \
@@ -27,7 +30,6 @@ PRODUCT_COPY_FILES += \
     device/htc/doubleshot/recovery/sbin/detect_key:recovery/root/sbin/detect_key \
     device/htc/doubleshot/recovery/sbin/htcbatt:recovery/root/sbin/htcbatt
 
-## (1) First, the most specific values, i.e. the aspects that are specific to GSM
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=240 \
     ro.com.google.clientidbase=android-htc \
@@ -42,10 +44,7 @@ PRODUCT_COPY_FILES += \
     device/htc/doubleshot/init.doubleshot.rc:root/init.doubleshot.rc \
     device/htc/doubleshot/ueventd.doubleshot.rc:root/ueventd.doubleshot.rc
 
-## (2) Also get non-open-source GSM-specific aspects if available
 $(call inherit-product-if-exists, vendor/htc/doubleshot/doubleshot-vendor.mk)
-
-## (3)  Finally, the least specific parts, i.e. the non-GSM-specific aspects
 
 DEVICE_PACKAGE_OVERLAYS += device/htc/doubleshot/overlay
 
@@ -66,6 +65,9 @@ PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml
 
 PRODUCT_PACKAGES += \
+    audio.a2dp.default \
+    libaudioutils \
+    audio.primary.doubleshot \
     librs_jni \
     gralloc.msm8660 \
     copybit.msm8660 \
@@ -141,6 +143,13 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/htc/doubleshot/modules/bcm4329.ko:system/lib/modules/bcm4329.ko
 
+# These are the hardware-specific settings that are stored in system properties.
+# Note that the only such settings should be the ones that are too low-level to
+# be reachable from resources or other mechanisms.
+PRODUCT_PROPERTY_OVERRIDES += \
+       wifi.interface=eth0 \
+       wifi.supplicant_scan_interval=15
+
 ### Wifi Calling
 ##PRODUCT_COPY_FILES += \
 ##    device/htc/doubleshot/prebuilt/HTC-DPM-GB.apk:/system/app/HTC-DPM-GB.apk
@@ -152,7 +161,8 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 PRODUCT_LOCALES += hdpi
 
 PRODUCT_COPY_FILES += \
-    device/htc/doubleshot/vold.fstab:system/etc/vold.fstab
+    device/htc/doubleshot/vold.fstab:system/etc/vold.fstab \
+    device/htc/doubleshot/apns-conf.xml:system/etc/apns-conf.xml
 
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
@@ -182,6 +192,7 @@ $(call inherit-product, device/htc/doubleshot/media_htcaudio.mk)
 ### stuff common to all HTC phones
 ##$(call inherit-product, device/htc/common/common.mk)
 
+$(call inherit-product, frameworks/base/build/phone-hdpi-512-dalvik-heap.mk)
 $(call inherit-product, build/target/product/full.mk)
 
 #PRODUCT_NAME := HTC Doubleshot

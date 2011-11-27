@@ -16,15 +16,10 @@ TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_SMP := true
 ARCH_ARM_HAVE_TLS_REGISTER := true
 
-TARGET_BOOTLOADER_BOARD_NAME := doubleshot
-TARGET_HAVE_HDMI_OUT := true
-TARGET_USES_OVERLAY := true
-TARGET_NO_RADIOIMAGE := true
-TARGET_HAVE_TSLIB := false
 TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
 
-BOARD_CUSTOM_USB_CONTROLLER := ../../device/htc/doubleshot/UsbController.cpp
+BOARD_USES_ADRENO_200 := true
 
 # Wifi related defines
 BOARD_WPA_SUPPLICANT_DRIVER := WEXT
@@ -38,9 +33,8 @@ WIFI_DRIVER_MODULE_NAME     := "bcm4329"
 
 # Audio 
 BOARD_USES_GENERIC_AUDIO := false
-BOARD_PREBUILT_LIBAUDIO := true
+BOARD_PREBUILT_LIBAUDIO := false
 BOARD_USES_AUDIO_LEGACY := true
-TARGET_PROVIDES_LIBAUDIO := true
 
 #Bluetooth
 BOARD_HAVE_BLUETOOTH := true
@@ -49,58 +43,24 @@ BOARD_HAVE_BLUETOOTH_BCM := true
 # Define egl.cfg location
 BOARD_EGL_CFG := device/htc/doubleshot/egl.cfg
 
-BOARD_USES_QCOM_LIBS := true
-BOARD_USES_QCOM_LIBRPC := true
-#BOARD_USES_QCOM_GPS := true
 BOARD_USE_QCOM_PMEM := true
-BOARD_CAMERA_USE_GETBUFFERINFO := true
-BOARD_HAVE_HTC_FFC := true
-
-BOARD_OVERLAY_FORMAT_YCbCr_420_SP := true
-BOARD_USES_ADRENO_200 := true
-
-TARGET_LIBAGL_USE_GRALLOC_COPYBITS := true
-TARGET_USES_SF_BYPASS := true
-TARGET_USES_C2D_COMPOSITION := true
-BOARD_AVOID_DRAW_TEXTURE_EXTENSION := true
-
-BOARD_HAVE_FM_RADIO := true
-BOARD_GLOBAL_CFLAGS += -DHAVE_FM_RADIO
-
-TARGET_BOOTLOADER_BOARD_NAME := doubleshot
-
-BOARD_USE_NEW_LIBRIL_HTC := true
-TARGET_PROVIDES_LIBRIL := vendor/htc/doubleshot/proprietary/libril.so
+BOARD_USES_QCOM_LIBRPC := true
+BOARD_USES_QCOM_LIBS := true
+BOARD_USES_QCOM_GPS := true
 
 BOARD_KERNEL_CMDLINE := no_console_suspend=1
 BOARD_KERNEL_BASE := 0x40400000
 BOARD_PAGE_SIZE := 2048
 
-TARGET_USE_SCORPION_BIONIC_OPTIMIZATION := true
-
 #BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := doubleshot
 #BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 50000
-#BOARD_USES_GPSSHIM := false
 
-# Define Prebuilt kernel locations
+BOARD_HAVE_FM_RADIO := true
+BOARD_GLOBAL_CFLAGS += -DHAVE_FM_RADIO
+
+TARGET_BOOTLOADER_BOARD_NAME := doubleshot
 TARGET_PREBUILT_KERNEL := device/htc/doubleshot/kernel
 TARGET_PROVIDES_INIT_RC := true
-
-# cat /proc/emmc
-# dev:        size     erasesize name
-# mmcblk0p31: 000ffa00 00000200 "misc"
-# mmcblk0p21: 00fffc00 00000200 "recovery"
-# mmcblk0p20: 01000000 00000200 "boot"
-# mmcblk0p22: 31fffc00 00000200 "system"
-# mmcblk0p24: 077fde00 00000200 "cache"
-# mmcblk0p23: 4aabc400 00000200 "userdata"
-# mmcblk0p27: 01400000 00000200 "devlog"
-# mmcblk0p29: 00040000 00000200 "pdata"
-# mmcblk0p17: 02800000 00000200 "radio"
-# mmcblk0p19: 01000000 00000200 "adsp"
-# mmcblk0p18: 007ffa00 00000200 "radio_config"
-# mmcblk0p25: 00400000 00000200 "modem_st1"
-# mmcblk0p26: 00400000 00000200 "modem_st2"
 
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 16777216
@@ -108,16 +68,54 @@ BOARD_RECOVERYIMAGE_PARTITION_SIZE := 16776192
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 838860800
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 20044333056
 BOARD_FLASH_BLOCK_SIZE := 131072
+TARGET_NO_RADIOIMAGE := true
 
 #TARGET_RELEASETOOLS_EXTENSIONS := device/htc/common
-
-BOARD_SDCARD_DEVICE_PRIMARY := /dev/block/mmcblk1p1
-BOARD_SDCARD_DEVICE_SECONDARY := /dev/block/mmcblk1
-BOARD_SDEXT_DEVICE := /dev/block/mmcblk1p2
-BOARD_USES_MMCUTILS := true
-BOARD_HAS_NO_MISC_PARTITION := true
 
 TARGET_RECOVERY_INITRC := device/htc/doubleshot/recovery/init.rc
 BOARD_CUSTOM_GRAPHICS:= ../../../device/htc/doubleshot/recovery/graphics.c
 
-BOARD_NEEDS_CUTILS_LOG := true
+
+
+###########################################
+## This is all stuff not currently in ICS #
+###########################################
+
+## Previously used in gingerbread for graphics
+#TARGET_USES_OVERLAY := true
+#TARGET_HAVE_TSLIB := false
+#BOARD_OVERLAY_FORMAT_YCbCr_420_SP := true
+#TARGET_LIBAGL_USE_GRALLOC_COPYBITS := true
+#TARGET_USES_SF_BYPASS := true
+#TARGET_USES_C2D_COMPOSITION := true
+#BOARD_AVOID_DRAW_TEXTURE_EXTENSION := true
+
+## Previously used in gingerbread for camera
+#BOARD_CAMERA_USE_GETBUFFERINFO := true
+#BOARD_HAVE_HTC_FFC := true
+
+## Previously used in gingerbread for qcom specific
+#TARGET_USE_SCORPION_BIONIC_OPTIMIZATION := true
+
+## Previously used in gingerbread for GPS.
+#BOARD_USES_GPSSHIM := false
+
+## Previously used in gingerbread.  We don't have /sys/class/usb_composite/rndis
+#BOARD_CUSTOM_USB_CONTROLLER := ../../device/htc/doubleshot/UsbController.cpp
+
+## Previously used in gingerbread.  For RIL.
+#BOARD_USE_NEW_LIBRIL_HTC := true
+#TARGET_PROVIDES_LIBRIL := vendor/htc/doubleshot/proprietary/libril.so
+
+## Previously used in gingerbread.  For storage mapping.
+#BOARD_SDCARD_DEVICE_PRIMARY := /dev/block/mmcblk1p1
+#BOARD_SDCARD_DEVICE_SECONDARY := /dev/block/mmcblk1
+#BOARD_SDEXT_DEVICE := /dev/block/mmcblk1p2
+#BOARD_USES_MMCUTILS := true
+#BOARD_HAS_NO_MISC_PARTITION := true
+
+## Previously used in gingerbread.  Misc.
+#BOARD_NEEDS_CUTILS_LOG := true
+
+## We don't have HDMI in the kernel.  We do have TV Out ability though...
+#TARGET_HAVE_HDMI_OUT := true
