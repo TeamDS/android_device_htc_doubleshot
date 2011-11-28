@@ -65,17 +65,17 @@ PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml
 
 PRODUCT_PACKAGES += \
-    audio.a2dp.default \
-    libaudioutils \
-    audio.primary.doubleshot \
     librs_jni \
     gralloc.msm8660 \
     copybit.msm8660 \
     overlay.default \
     gps.doubleshot \
     liboverlay \
-    com.android.future.usb.accessory \
-    libaudio
+    audio.a2dp.default \
+    libaudioutils \
+    audio.primary.doubleshot \
+    libaudio \
+    com.android.future.usb.accessory
 
     # sensors.doubleshot \
     # lights.doubleshot \
@@ -86,8 +86,7 @@ PRODUCT_PACKAGES += \
 # Keylayouts
 PRODUCT_COPY_FILES += \
     device/htc/doubleshot/keychars/BT_HID.kcm.bin:system/usr/keychars/BT_HID.kcm.bin \
-    device/htc/doubleshot/keychars/doubleshot-keypad-v0.kcm.bin:system/usr/keychars/doubleshot-keypad-v0.kcm.bin \
-    device/htc/doubleshot/keychars/doubleshot-keypad.kcm.bin:system/usr/keychars/doubleshot-keypad.kcm.bin \
+    device/htc/doubleshot/keychars/doubleshot-keypad.kcm:system/usr/keychars/doubleshot-keypad.kcm \
     device/htc/doubleshot/keychars/qwerty.kcm.bin:system/usr/keychars/qwerty.kcm.bin \
     device/htc/doubleshot/keychars/qwerty2.kcm.bin:system/usr/keychars/qwerty2.kcm.bin \
     device/htc/doubleshot/keylayout/AVRCP.kl:system/usr/keylayout/AVRCP.kl \
@@ -161,8 +160,7 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 PRODUCT_LOCALES += hdpi
 
 PRODUCT_COPY_FILES += \
-    device/htc/doubleshot/vold.fstab:system/etc/vold.fstab \
-    device/htc/doubleshot/apns-conf.xml:system/etc/apns-conf.xml
+    device/htc/doubleshot/vold.fstab:system/etc/vold.fstab
 
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
@@ -192,11 +190,11 @@ $(call inherit-product, device/htc/doubleshot/media_htcaudio.mk)
 ### stuff common to all HTC phones
 ##$(call inherit-product, device/htc/common/common.mk)
 
-$(call inherit-product, frameworks/base/build/phone-hdpi-512-dalvik-heap.mk)
-$(call inherit-product, build/target/product/full.mk)
+$(call inherit-product, build/target/product/full_base.mk)
 
-#PRODUCT_NAME := HTC Doubleshot
-PRODUCT_NAME := full_doubleshot
+$(call inherit-product, frameworks/base/build/phone-hdpi-512-dalvik-heap.mk)
+
+PRODUCT_NAME := device_doubleshot
 PRODUCT_DEVICE := doubleshot
 PRODUCT_MODEL := myTouch_4G_Slide
 PRODUCT_MANUFACTURER := HTC

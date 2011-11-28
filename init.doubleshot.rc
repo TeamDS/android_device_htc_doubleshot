@@ -6,11 +6,9 @@ on early-init
 
 on boot
     mount debugfs /sys/kernel/debug /sys/kernel/debug
-
     service post-boot /system/bin/sh /system/etc/init.post_boot.sh
     user root
     oneshot
-
 on early-fs
     mkdir /system
     mkdir /data 0771 system system
@@ -22,8 +20,6 @@ on early-fs
     mount ext4 /dev/block/mmcblk0p24 /cache wait noatime nosuid nodev barrier=1
     mount ext4 /dev/block/mmcblk0p27 /devlog wait noatime nosuid nodev barrier=1
     
-    device /dev/block/mmcblk0p16 0460 radio diag
-
 on fs
     rm /vendor
     #8x60: mount radio partition and create links for modem/q6 firmwares
@@ -51,7 +47,6 @@ on fs
     symlink /vendor/firmware/misc/modem.b01 /vendor/firmware/modem.b01
     symlink /vendor/firmware/misc/modem.b00 /vendor/firmware/modem.b00
     symlink /vendor/firmware/misc/modem.mdt /vendor/firmware/modem.mdt
-
 
     # double check the perms and set owner
     chown root root /devlog
@@ -140,16 +135,15 @@ on fs
 
 # Force loading of modem and Q6 images
 service load-modem /system/bin/load-modem.sh
-    class core
     oneshot
 
 service wpa_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant \
     -Dwext -ieth0 -c/data/misc/wifi/wpa_supplicant.conf
-    class main
 #   we will start as root and wpa_supplicant will switch to user wifi
 #   after setting up the capabilities required for WEXT
 #   user wifi
 #   group wifi inet keystore
+    class main
     socket wpa_eth0 dgram 660 wifi wifi
     disabled
     oneshot
@@ -158,17 +152,6 @@ service dhcpcd_eth0 /system/bin/dhcpcd -ABKL
     class main
     disabled
     oneshot
-
-service iprenew_eth0 /system/bin/dhcpcd -n
-    class main
-    disabled
-    oneshot
-
-# create virtual SD card at /mnt/sdcard, based on the /data/media directory
-# daemon will drop to user/group system/media_rw after initializing
-# underlying files in /data/media will be created with user and group media_rw (1023)
-service sdcard /system/bin/sdcard /data/media 1023 1023
-	class late_start
 
 # compass/accelerometer daemon
 service akmd /system/bin/akmd
@@ -195,16 +178,16 @@ service hciattach /system/bin/logwrapper /system/bin/brcm_patchram_plus --enable
 # Limit baudrate to 460800 to ensure reliable uart operation
 #service btld /system/bin/logwrapper /system/bin/btld -hwtun 10.0.2.2 -hb 460800 3000000 -lpm 1
 service btld /system/bin/logwrapper /system/bin/btld -hb 3000000
-    class core
+    class main
     user root
     group bluetooth net_bt_admin
     disabled
     oneshot
 
 service udhcpd /system/bin/udhcpd
-    class main
-	disabled
-	oneshot
+    class core
+    disabled
+    oneshot
 
 #service srv_ser2net /system/bin/ser2net -n
 #    disabled
@@ -221,13 +204,11 @@ service rmt_storage /system/bin/rmt_storage /dev/block/mmcblk0p25 /dev/block/mmc
     disabled
 
 service htc_ebdlogd /system/bin/htc_ebdlogd -s -k -P 7
-    class core
     user root
     disabled
     oneshot
 
 service htc_ebdlogd_rel /system/bin/htc_ebdlogd -s -k
-    class core
     user root
     disabled
     oneshot
@@ -240,10 +221,7 @@ on property:ro.build.tags=test-keys
 #    oneshot
 
 service hdmid /system/bin/hdmid
-    class core
     socket displayd stream 0660 root system graphics
-    disable
-    start hdmid
 
 service htcbatt /system/bin/htcbatt
     class charger
@@ -260,7 +238,6 @@ on property:ro.emmc=1
 
 # for modem link
 service modem /system/xbin/wireless_modem
-    class core
     user system
     group system radio
     disabled
@@ -275,10 +252,10 @@ on property:service.modem.enable=0
 
 # + SSD_RIL: Otis: from Qualcomm QMI and Netmgrd
 service qmuxd /system/bin/qmuxd
-    class core
+    class main
 
 service netmgrd /system/bin/netmgrd
-    class core
+    class main
 
 on property:ro.use_data_netmgrd=false
     # netmgr not supported on specific target
@@ -286,22 +263,18 @@ on property:ro.use_data_netmgrd=false
 # - SSD_RIL: Otis: from Qualcomm QMI and Netmgrd
 
 service dcvs0 /system/bin/dcvs --cpu=0 --slacktime=16
-    class core
     user root
     disabled
 
 service dcvs1 /system/bin/dcvs --cpu=1 --slacktime=16
-    class core
     user root
     disabled
 
 service mpdecision /system/bin/mpdecision --Nw 5.4 --Ts 350 --no_sleep --avg_comp --single_core_while_panel_off
-    class core
     user root
     disabled
 
 service thermald /system/bin/thermald
-    class core
     user root
     disabled
 

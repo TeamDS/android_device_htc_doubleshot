@@ -126,12 +126,10 @@ on post-fs-data
     chown system system /data
     chmod 0771 /data
 
-    # create htcfs
-    mkdir /data/htcfs 0777 root root
-
     # Create dump dir and collect dumps.
     # Do this before we mount cache so eventually we can use cache for
     # storing dumps on platforms which do not have a dedicated dump partition.
+   
     mkdir /data/dontpanic 0750 root log
 
     # Collect apanic data, free resources and re-arm trigger
@@ -145,7 +143,7 @@ on post-fs-data
 
     write /proc/apanic_console 1
 
-# create basic filesystem structure
+    # create basic filesystem structure
     mkdir /data/misc 01771 system misc
     mkdir /data/misc/bluetoothd 0770 bluetooth bluetooth
     mkdir /data/misc/bluetooth 0770 system system
@@ -165,8 +163,6 @@ on post-fs-data
 
     # create dalvik-cache, so as to enforce our permissions
     mkdir /data/dalvik-cache 0771 system system
-    chown system system /data/dalvik-cache
-    chmod 0771 /data/dalvik-cache
 
     # create resource-cache and double-check the perms
     mkdir /data/resource-cache 0771 system system
@@ -179,23 +175,15 @@ on post-fs-data
     # create directory for DRM plug-ins
     mkdir /data/drm 0774 drm drm
 
-    # double check the perms, in case lost+found already exists, and set owner
-    chown root root /data/lost+found
-    chmod 0770 /data/lost+found
-    chown root root /cache/lost+found
-    chmod 0770 /cache/lost+found
-
     # allow net_raw to have access to /dev/socket directory
     chown root net_raw /dev/socket
     chmod 0775 /dev/socket
 
-    # allow system to modify cpufreq control files
-    chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-    chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
-    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
-    chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+    # If there is no fs-post-data action in the init.<device>.rc file, you
+    # must uncomment this line, otherwise encrypted filesystems
+    # won't work.
+    # Set indication (checked by vold) that we have finished this action
+    #setprop vold.post_fs_data_done 1
 
     # Include extra init file
     import /system/etc/init.local.rc
@@ -209,16 +197,12 @@ on boot
 # set RLIMIT_NICE to allow priorities from 19 to -20
     setrlimit 13 40 40
 
-# Memory management.  Basic kernel parameters, and allow the high
-# level system server to be able to adjust the kernel OOM driver
-# paramters to match how it is managing things.
     write /proc/sys/vm/overcommit_memory 1
     write /proc/sys/vm/min_free_order_shift 4
     chown root system /sys/module/lowmemorykiller/parameters/adj
     chmod 0664 /sys/module/lowmemorykiller/parameters/adj
     chown root system /sys/module/lowmemorykiller/parameters/minfree
     chmod 0664 /sys/module/lowmemorykiller/parameters/minfree
-
     # Set init and its forked children's oom_adj.
     write /proc/1/oom_adj -16
 
@@ -312,9 +296,6 @@ on boot
     class_start core
     class_start main
 
-# Run sysinit
-    exec /system/bin/sysinit
-
 on nonencrypted
     class_start late_start
 
@@ -366,7 +347,6 @@ on property:sys.usb.config=accessory,adb
 # when changing the default configuration
 on property:persist.sys.usb.config=*
     setprop sys.usb.config $persist.sys.usb.config
-
 ## Daemon processes to be run by init.
 ##
 service ueventd /sbin/ueventd
@@ -431,19 +411,13 @@ service ril-daemon /system/bin/rild
     socket rild-htc-dmagent stream 660 radio system
     socket rild-htc-simapi stream 660 radio system
     user root
-    group radio cache inet misc audio sdcard_rw net_admin net_raw log
+    group radio cache inet misc audio sdcard_rw net_admin net_raw
 
 service surfaceflinger /system/bin/surfaceflinger
     class main
     user system
     group graphics
     onrestart restart zygote
-
-service ril-ims-daemon /system/bin/rild_ims
-    class main
-    socket rild-ims stream 660 root radio
-    user root
-    group radio cache inet misc audio
 
 service zygote /system/bin/app_process -Xzygote /system/bin --zygote --start-system-server
     class main
@@ -486,34 +460,6 @@ service bluetoothd /system/bin/bluetoothd -n
     group bluetooth net_bt_admin misc
     disabled
 
-service hfag /system/bin/sdptool add --channel=10 HFAG
-    class main
-    user bluetooth
-    group bluetooth net_bt_admin
-    disabled
-    oneshot
-
-service hsag /system/bin/sdptool add --channel=11 HSAG
-    class main
-    user bluetooth
-    group bluetooth net_bt_admin
-    disabled
-    oneshot
-
-service opush /system/bin/sdptool add --channel=12 OPUSH
-    class main
-    user bluetooth
-    group bluetooth net_bt_admin
-    disabled
-    oneshot
-
-service pbap /system/bin/sdptool add --channel=19 PBAP
-    class main
-    user bluetooth
-    group bluetooth net_bt_admin
-    disabled
-    oneshot
-
 service installd /system/bin/installd
     class main
     socket installd stream 600 system system
@@ -545,13 +491,11 @@ service dumpstate /system/bin/dumpstate -s
     socket dumpstate stream 0660 shell log
     disabled
     oneshot
-
+    
 service ipd /system/bin/ipd
-    class main
     socket ipd stream 666 root inet
     
 service charging /system/bin/charging
-    class charger
     user root
     group root
     disabled
