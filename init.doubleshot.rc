@@ -113,6 +113,8 @@ on fs
 	chown radio radio /sys/module/htc_battery_8x60/parameters/phone_call
 	chmod 0660 /sys/module/htc_battery_8x60/parameters/phone_call
 
+    # for Slate charging timer
+	chown radio /sys/class/power_supply/battery/charger_timer
 
     # flashlight
     chown system camera /sys/class/leds/flashlight/brightness
@@ -224,7 +226,7 @@ service hdmid /system/bin/hdmid
     socket displayd stream 0660 root system graphics
 
 service htcbatt /system/bin/htcbatt
-    class charger
+    class core
     user root
 
 on property:ro.build.tags=test-keys

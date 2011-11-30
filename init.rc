@@ -407,11 +407,8 @@ service ril-daemon /system/bin/rild
     class main
     socket rild stream 660 root radio
     socket rild-debug stream 660 radio system
-    socket rild-htc stream 660 radio system
-    socket rild-htc-dmagent stream 660 radio system
-    socket rild-htc-simapi stream 660 radio system
     user root
-    group radio cache inet misc audio sdcard_rw net_admin net_raw
+    group radio cache inet misc audio sdcard_rw log
 
 service surfaceflinger /system/bin/surfaceflinger
     class main
@@ -489,14 +486,5 @@ service keystore /system/bin/keystore /data/misc/keystore
 service dumpstate /system/bin/dumpstate -s
     class main
     socket dumpstate stream 0660 shell log
-    disabled
-    oneshot
-    
-service ipd /system/bin/ipd
-    socket ipd stream 666 root inet
-    
-service charging /system/bin/charging
-    user root
-    group root
     disabled
     oneshot

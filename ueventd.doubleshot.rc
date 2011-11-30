@@ -16,6 +16,8 @@
 #sensors
 /dev/akm8975_daemon     0640    compass     system
 /dev/akm8975_aot        0640    compass     system
+/dev/cm3602             0640    compass     system
+/dev/lightsensor        0640    system      system
 
 #audio
 /dev/htc-acdb           0660    system      audio
@@ -51,4 +53,4 @@
 /dev/kgsl-3d0           0666    root        root
 /dev/kgsl-2d1           0666    root        root
 /dev/pmem               0660    system      graphics
-
+/dev/gemini*            0660    system      system
