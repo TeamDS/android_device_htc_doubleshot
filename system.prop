@@ -1,7 +1,8 @@
 # system.prop for doubleshot
 
 debug.fb.rgb565 = 0
-ro.telephony.ril.v3=1
+ro.telephony.ril.v3=signalstrength
+hwui.render_dirty_regions=false
 debug.sf.hw=1
 #debug.composition.type=c2d
 #debug.overlayui.enable=0
@@ -37,7 +38,7 @@ ro.ril.enable.ganlite = 1
 # 0 => WCDMA preferred.
 ro.telephony.default_network=0
 
-wifi.interface=eth0
+wifi.interface=wlan0
 wifi.supplicant_scan_interval=15
 
 mobiledata.interfaces=gannet0,rmnet0,rmnet1,rmnet2

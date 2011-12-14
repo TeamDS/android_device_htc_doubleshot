@@ -1,3 +1,5 @@
+import init.doubleshot.usb.rc
+
 on early-init
 	export EXTERNAL_STORAGE /mnt/sdcard
 	mkdir /mnt/sdcard 0000 system system
@@ -20,7 +22,10 @@ on early-fs
     mount ext4 /dev/block/mmcblk0p24 /cache wait noatime nosuid nodev barrier=1
     mount ext4 /dev/block/mmcblk0p27 /devlog wait noatime nosuid nodev barrier=1
     
-on fs
+    device /dev/block/mmcblk0p16 0460 radio diag
+
+#on fs
+    devwait /dev/block/mmcblk0p17
     rm /vendor
     #8x60: mount radio partition and create links for modem/q6 firmwares
     mkdir /vendor 0771 system system
@@ -48,6 +53,10 @@ on fs
     symlink /vendor/firmware/misc/modem.b00 /vendor/firmware/modem.b00
     symlink /vendor/firmware/misc/modem.mdt /vendor/firmware/modem.mdt
 
+    symlink /system/vendor/firmware/fw_bcm4329.bin /vendor/firmware/fw_bcm4329.bin
+    symlink /system/vendor/firmware/fw_bcm4329_apsta.bin /vendor/firmware/fw_bcm4329_apsta.bin
+    symlink /system/vendor/firmware/bcm4329.hcd /vendor/firmware/bcm4329.hcd
+
     # double check the perms and set owner
     chown root root /devlog
     chmod 0700 /devlog
@@ -59,9 +68,6 @@ on fs
     mkdir /app-cache/ciq/socket 0777 root system
 
     mkdir /data/radio 0770 radio radio
-
-    #wifi
-    mkdir /data/misc 1771 system misc
     mkdir /data/misc/wifi 0770 wifi wifi
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
     mkdir /data/misc/dhcp 0770 dhcp dhcp
@@ -135,23 +141,24 @@ on fs
     write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold 90
     write /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate 50000
 
+# Setup permissions for setting cpu params
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors
+
 # Force loading of modem and Q6 images
 service load-modem /system/bin/load-modem.sh
     oneshot
 
-service wpa_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant \
-    -Dwext -ieth0 -c/data/misc/wifi/wpa_supplicant.conf
-#   we will start as root and wpa_supplicant will switch to user wifi
-#   after setting up the capabilities required for WEXT
-#   user wifi
-#   group wifi inet keystore
+# Always start adbd on userdebug and eng builds
+    setprop sys.usb.config adb
+
+service wpa_supplicant /system/bin/wpa_supplicant -Dwext -iwlan0 -c/data/misc/wifi/wpa_supplicant.conf
     class main
-    socket wpa_eth0 dgram 660 wifi wifi
+    socket wpa_wlan0 dgram 660 wifi wifi
     disabled
     oneshot
 
-service dhcpcd_eth0 /system/bin/dhcpcd -ABKL
-    class main
+service dhcpcd_wlan0 /system/bin/dhcpcd -ABKL
+    class main 
     disabled
     oneshot
 
@@ -161,6 +168,11 @@ service akmd /system/bin/akmd
     user compass
     group compass misc input
 
+service iprenew_wlan0 /system/bin/dhcpcd -n
+     class main
+     disabled
+     oneshot
+
 # bugreport is triggered by the KEY_BACK and KEY_MENU keycodes
 service bugreport /system/bin/dumpstate -d -v -o /sdcard/bugreports/bugreport
     class main
@@ -168,20 +180,9 @@ service bugreport /system/bin/dumpstate -d -v -o /sdcard/bugreports/bugreport
     oneshot
     keycodes 158 139
 
-service hciattach /system/bin/logwrapper /system/bin/brcm_patchram_plus --enable_hci --baudrate 3000000 --patchram /etc/firmware/BCM4329B1_002.002.023.0589.0632.hcd /dev/ttyHS0
+service hciattach /system/bin/brcm_patchram_plus --enable_hci --baudrate 3000000 --patchram /vendor/firmware/bcm4329.hcd /dev/ttyHS0
     class main
     user bluetooth
-    group bluetooth net_bt_admin
-    disabled
-    oneshot
-
-# Make sure we startup btld before hcid
-# Set target address to emulator host loopback IF
-# Limit baudrate to 460800 to ensure reliable uart operation
-#service btld /system/bin/logwrapper /system/bin/btld -hwtun 10.0.2.2 -hb 460800 3000000 -lpm 1
-service btld /system/bin/logwrapper /system/bin/btld -hb 3000000
-    class main
-    user root
     group bluetooth net_bt_admin
     disabled
     oneshot
@@ -224,6 +225,8 @@ on property:ro.build.tags=test-keys
 
 service hdmid /system/bin/hdmid
     socket displayd stream 0660 root system graphics
+    disable
+    start hdmid
 
 service htcbatt /system/bin/htcbatt
     class core

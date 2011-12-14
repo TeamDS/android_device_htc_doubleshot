@@ -1,5 +1,4 @@
-#
-# Copyright (C) 2011 The Android Open Source Project
+# Copyright (C) 2008 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,31 +12,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ifeq ($(BOARD_USES_AUDIO_LEGACY),true)
-LOCAL_PATH := $(call my-dir)
+LOCAL_PATH:= $(call my-dir)
+
+ifneq ($(TARGET_SIMULATOR),true)
 
 include $(CLEAR_VARS)
 
-LOCAL_MODULE := audio.primary.$(TARGET_BOOTLOADER_BOARD_NAME)
+LOCAL_MODULE := lights.doubleshot
+
 LOCAL_MODULE_PATH := $(TARGET_OUT_SHARED_LIBRARIES)/hw
+
 LOCAL_MODULE_TAGS := optional
 
-LOCAL_SHARED_LIBRARIES := \
-    libcutils \
-    libutils \
-    libmedia \
-    libhardware_legacy
+LOCAL_SRC_FILES := lights.c
+LOCAL_SHARED_LIBRARIES := liblog
+LOCAL_PRELINK_MODULE := false
 
-LOCAL_SHARED_LIBRARIES += libdl
-
-LOCAL_SHARED_LIBRARIES += libaudio
-
-LOCAL_STATIC_LIBRARIES := \
-    libmedia_helper
-
-LOCAL_WHOLE_STATIC_LIBRARIES := \
-    libaudiohw_legacy
+LOCAL_MODULE_TAGS := optional
 
 include $(BUILD_SHARED_LIBRARY)
 
-endif
+endif # !TARGET_SIMULATOR
+

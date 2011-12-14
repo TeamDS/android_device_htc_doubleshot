@@ -42,6 +42,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_COPY_FILES += \
     device/htc/doubleshot/init.rc:root/init.rc \
     device/htc/doubleshot/init.doubleshot.rc:root/init.doubleshot.rc \
+    device/htc/doubleshot/init.doubleshot.usb.rc:root/init.doubleshot.usb.rc \
     device/htc/doubleshot/ueventd.doubleshot.rc:root/ueventd.doubleshot.rc
 
 $(call inherit-product-if-exists, vendor/htc/doubleshot/doubleshot-vendor.mk)
@@ -65,20 +66,20 @@ PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml
 
 PRODUCT_PACKAGES += \
+    audio.a2dp.default \
+    libaudioutils \
+    audio.primary.doubleshot \
     librs_jni \
     gralloc.msm8660 \
     copybit.msm8660 \
     overlay.default \
     gps.doubleshot \
     liboverlay \
-    audio.a2dp.default \
-    libaudioutils \
-    audio.primary.doubleshot \
-    libaudio \
-    com.android.future.usb.accessory
+    libmemalloc \
+    com.android.future.usb.accessory \
+    sensors.doubleshot \
+    lights.doubleshot
 
-    # sensors.doubleshot \
-    # lights.doubleshot \
     # libOmxCore \
     # libOmxVenc \
     # libOmxVdec \
@@ -100,9 +101,7 @@ PRODUCT_COPY_FILES += \
 
 # Firmware
 PRODUCT_COPY_FILES += \
-    device/htc/doubleshot/firmware/BCM4329B1_002.002.023.0589.0632.hcd:system/etc/firmware/BCM4329B1_002.002.023.0589.0632.hcd \
-    device/htc/doubleshot/firmware/fw_bcm4329.bin:system/etc/firmware/fw_bcm4329.bin \
-    device/htc/doubleshot/firmware/fw_bcm4329_apsta.bin:system/etc/firmware/fw_bcm4329_apsta.bin \
+    device/htc/doubleshot/firmware/bcm4329.hcd:system/etc/firmware/bcm4329.hcd \
     device/htc/doubleshot/firmware/vidc_1080p.fw:system/etc/firmware/vidc_1080p.fw \
     device/htc/doubleshot/firmware/leia_pfp_470.fw:system/etc/firmware/leia_pfp_470.fw \
     device/htc/doubleshot/firmware/leia_pm4_470.fw:system/etc/firmware/leia_pm4_470.fw
@@ -141,13 +140,6 @@ PRODUCT_COPY_FILES += \
 # Wifi Module
 PRODUCT_COPY_FILES += \
     device/htc/doubleshot/modules/bcm4329.ko:system/lib/modules/bcm4329.ko
-
-# These are the hardware-specific settings that are stored in system properties.
-# Note that the only such settings should be the ones that are too low-level to
-# be reachable from resources or other mechanisms.
-PRODUCT_PROPERTY_OVERRIDES += \
-       wifi.interface=eth0 \
-       wifi.supplicant_scan_interval=15
 
 ### Wifi Calling
 ##PRODUCT_COPY_FILES += \
@@ -190,7 +182,7 @@ $(call inherit-product, device/htc/doubleshot/media_htcaudio.mk)
 ### stuff common to all HTC phones
 ##$(call inherit-product, device/htc/common/common.mk)
 
-$(call inherit-product, build/target/product/full_base.mk)
+$(call inherit-product, build/target/product/full_base_telephony.mk)
 
 $(call inherit-product, frameworks/base/build/phone-hdpi-512-dalvik-heap.mk)
 
