@@ -18,10 +18,7 @@
 PRODUCT_COPY_FILES += \
     device/htc/doubleshot/gps.conf:system/etc/gps.conf
 
-PRODUCT_AAPT_CONFIG := normal hdpi
-PRODUCT_AAPT_PREF_CONFIG := hdpi
-
-## recovery and custom charging
+# Recovery and custom charging
 PRODUCT_COPY_FILES += \
     device/htc/doubleshot/prebuilt/init:recovery/root/init \
     device/htc/doubleshot/recovery/sbin/choice_fn:recovery/root/sbin/choice_fn \
@@ -30,6 +27,7 @@ PRODUCT_COPY_FILES += \
     device/htc/doubleshot/recovery/sbin/detect_key:recovery/root/sbin/detect_key \
     device/htc/doubleshot/recovery/sbin/htcbatt:recovery/root/sbin/htcbatt
 
+# General build.prop overrides
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=240 \
     ro.com.google.clientidbase=android-htc \
@@ -39,16 +37,20 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.lockprof.threshold=500 \
     dalvik.vm.dexopt-flags=m=y
 
+# Boot files
 PRODUCT_COPY_FILES += \
     device/htc/doubleshot/init.rc:root/init.rc \
     device/htc/doubleshot/init.doubleshot.rc:root/init.doubleshot.rc \
     device/htc/doubleshot/init.doubleshot.usb.rc:root/init.doubleshot.usb.rc \
     device/htc/doubleshot/ueventd.doubleshot.rc:root/ueventd.doubleshot.rc
 
+# Vendor inheritance
 $(call inherit-product-if-exists, vendor/htc/doubleshot/doubleshot-vendor.mk)
 
+# Device overlay
 DEVICE_PACKAGE_OVERLAYS += device/htc/doubleshot/overlay
 
+# Permissions
 PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
     frameworks/base/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
@@ -65,24 +67,35 @@ PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
     frameworks/base/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml
 
+# Graphics
 PRODUCT_PACKAGES += \
-    audio.a2dp.default \
-    libaudioutils \
-    audio.primary.doubleshot \
-    librs_jni \
     gralloc.msm8660 \
     copybit.msm8660 \
     overlay.default \
-    gps.doubleshot \
     liboverlay \
-    libmemalloc \
-    com.android.future.usb.accessory \
+    libmemalloc
+
+# Audio
+PRODUCT_PACKAGES += \
+    audio.a2dp.default \
+    libaudioutils \
+    audio.primary.doubleshot
+
+# Other Hardware
+PRODUCT_PACKAGES += \
+    gps.doubleshot \
     sensors.doubleshot \
     lights.doubleshot
 
-    # libOmxCore \
-    # libOmxVenc \
-    # libOmxVdec \
+# Misc
+PRODUCT_PACKAGES += \
+    librs_jni \
+    com.android.future.usb.accessory
+
+# DSPManager
+PRODUCT_PACKAGES += \
+    DSPManager \
+    libcyanogen-dsp
 
 # Keylayouts
 PRODUCT_COPY_FILES += \
@@ -150,19 +163,17 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 
 # device uses high-density artwork where available
 PRODUCT_LOCALES += hdpi
+PRODUCT_AAPT_CONFIG := normal hdpi
+PRODUCT_AAPT_PREF_CONFIG := hdpi
 
+# System files
 PRODUCT_COPY_FILES += \
     device/htc/doubleshot/vold.fstab:system/etc/vold.fstab
-
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 # The gps config appropriate for this device
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
-
-# media config xml file
-PRODUCT_COPY_FILES += \
-    device/htc/doubleshot/media_profiles.xml:system/etc/media_profiles.xml
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
 	LOCAL_KERNEL := device/htc/doubleshot/kernel

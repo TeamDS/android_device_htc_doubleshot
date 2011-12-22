@@ -1,36 +1,23 @@
 import init.doubleshot.usb.rc
 
 on early-init
-	export EXTERNAL_STORAGE /mnt/sdcard
-	mkdir /mnt/sdcard 0000 system system
-	# for backwards compatibility
-	symlink /mnt/sdcard /sdcard
+    export EXTERNAL_STORAGE /mnt/sdcard
+    mkdir /mnt/sdcard 0000 system system
+    # for backwards compatibility
+    symlink /mnt/sdcard /sdcard
 
-on boot
-    mount debugfs /sys/kernel/debug /sys/kernel/debug
-    service post-boot /system/bin/sh /system/etc/init.post_boot.sh
-    user root
-    oneshot
 on early-fs
     mkdir /system
     mkdir /data 0771 system system
     mkdir /cache 0770 system cache
     mkdir /devlog 0700 root root
-    
-    mount ext4 /dev/block/mmcblk0p22 /system wait ro barrier=1
-    mount ext4 /dev/block/mmcblk0p23 /data wait noatime nosuid nodev barrier=1 noauto_da_alloc
-    mount ext4 /dev/block/mmcblk0p24 /cache wait noatime nosuid nodev barrier=1
-    mount ext4 /dev/block/mmcblk0p27 /devlog wait noatime nosuid nodev barrier=1
-    
-    device /dev/block/mmcblk0p16 0460 radio diag
 
-#on fs
-    devwait /dev/block/mmcblk0p17
+    #8x60: firmware
     rm /vendor
-    #8x60: mount radio partition and create links for modem/q6 firmwares
     mkdir /vendor 0771 system system
     mkdir /vendor/firmware 0771 system system
     mkdir /vendor/firmware/misc 0771 system system
+    wait /dev/block/mmcblk0p17
     mount vfat /dev/block/mmcblk0p17 /vendor/firmware/misc ro shortname=lower
     symlink /vendor/firmware/misc/q6.b07 /vendor/firmware/q6.b07
     symlink /vendor/firmware/misc/q6.b06 /vendor/firmware/q6.b06
@@ -52,10 +39,13 @@ on early-fs
     symlink /vendor/firmware/misc/modem.b01 /vendor/firmware/modem.b01
     symlink /vendor/firmware/misc/modem.b00 /vendor/firmware/modem.b00
     symlink /vendor/firmware/misc/modem.mdt /vendor/firmware/modem.mdt
-
     symlink /system/vendor/firmware/fw_bcm4329.bin /vendor/firmware/fw_bcm4329.bin
     symlink /system/vendor/firmware/fw_bcm4329_apsta.bin /vendor/firmware/fw_bcm4329_apsta.bin
     symlink /system/vendor/firmware/bcm4329.hcd /vendor/firmware/bcm4329.hcd
+    mount ext4 /dev/block/mmcblk0p22 /system wait ro barrier=1
+    mount ext4 /dev/block/mmcblk0p23 /data wait noatime nosuid nodev barrier=1 noauto_da_alloc
+    mount ext4 /dev/block/mmcblk0p24 /cache wait noatime nosuid nodev barrier=1
+    mount ext4 /dev/block/mmcblk0p27 /devlog wait noatime nosuid nodev barrier=1
 
     # double check the perms and set owner
     chown root root /devlog
@@ -68,6 +58,9 @@ on early-fs
     mkdir /app-cache/ciq/socket 0777 root system
 
     mkdir /data/radio 0770 radio radio
+
+    #wifi
+    mkdir /data/misc 1771 system misc
     mkdir /data/misc/wifi 0770 wifi wifi
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
     mkdir /data/misc/dhcp 0770 dhcp dhcp
@@ -80,33 +73,33 @@ on early-fs
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
     chmod 0660                /sys/class/rfkill/rfkill0/state
 
-	# for modem link
-	chown system system /sys/module/serial/parameters/modem_enabled
-	chown system system /dev/ttyHSUSB0
-	chown system system /dev/ttySA0
-	chown system system /dev/smd9
+    # for modem link
+    chown system system /sys/module/serial/parameters/modem_enabled
+    chown system system /dev/ttyHSUSB0
+    chown system system /dev/ttySA0
+    chown system system /dev/smd9
 
-	# for Flip to speaker
-	chown radio radio /sys/class/htc_accelerometer/accelerometer/PhoneOnOffFlag
-	chown radio radio /sys/class/htc_ecompass/ecompass/PhoneOnOffFlag
+    # for Flip to speaker
+    chown radio radio /sys/class/htc_accelerometer/accelerometer/PhoneOnOffFlag
+    chown radio radio /sys/class/htc_ecompass/ecompass/PhoneOnOffFlag
 
-	# for Optical sensors
-	chown system system /sys/class/optical_sensors/lightsensor/ls_adc
-	chown system system /sys/class/optical_sensors/lightsensor/ls_auto
-	chown system system /sys/class/optical_sensors/lightsensor/ls_kadc
-	chown system radio /sys/class/optical_sensors/proximity/ps_adc
-	chown system system /sys/class/optical_sensors/proximity/ps_kadc
-	chown system system /sys/class/optical_sensors/proximity/ps_led
-	chown system system /sys/class/optical_sensors/proximity/ps_test_mode
+    # for Optical sensors
+    chown system system /sys/class/optical_sensors/lightsensor/ls_adc
+    chown system system /sys/class/optical_sensors/lightsensor/ls_auto
+    chown system system /sys/class/optical_sensors/lightsensor/ls_kadc
+    chown system radio /sys/class/optical_sensors/proximity/ps_adc
+    chown system system /sys/class/optical_sensors/proximity/ps_kadc
+    chown system system /sys/class/optical_sensors/proximity/ps_led
+    chown system system /sys/class/optical_sensors/proximity/ps_test_mode
 
     # fmtx
     chown bluetooth bluetooth /sys/class/rfkill/rfkill1/type
     chown bluetooth bluetooth /sys/class/rfkill/rfkill1/state
     chmod 0660                /sys/class/rfkill/rfkill1/state
 
-	# for simlock
-	chown radio radio /dev/simlock
-	chmod 0660 /dev/simlock
+    # for simlock
+    chown radio radio /dev/simlock
+    chmod 0660 /dev/simlock
 
     chown bluetooth bluetooth /dev/rfkill
     chmod 0660                /dev/rfkill
@@ -115,12 +108,19 @@ on early-fs
     chown bluetooth bluetooth /sys/module/htc_bdaddress/parameters/bdaddress
     setprop ro.bt.bdaddr_path /sys/module/htc_bdaddress/parameters/bdaddress
 
-	# for charging function
-	chown radio radio /sys/module/htc_battery_8x60/parameters/phone_call
-	chmod 0660 /sys/module/htc_battery_8x60/parameters/phone_call
+    # for charging function
+    chown radio radio /sys/module/htc_battery_8x60/parameters/phone_call
+    chmod 0660 /sys/module/htc_battery_8x60/parameters/phone_call
 
     # for Slate charging timer
 	chown radio /sys/class/power_supply/battery/charger_timer
+
+on boot
+    mount debugfs /sys/kernel/debug /sys/kernel/debug
+    
+service post-boot /system/bin/sh /system/etc/init.post_boot.sh
+    user root
+    oneshot
 
     # flashlight
     chown system camera /sys/class/leds/flashlight/brightness
