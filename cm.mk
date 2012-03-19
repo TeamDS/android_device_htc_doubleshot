@@ -1,4 +1,4 @@
-$(call inherit-product, device/htc/doubleshot/device_doubleshot.mk)
+$(call inherit-product, device/htc/doubleshot/full_doubleshot.mk)
 
 PRODUCT_RELEASE_NAME := Doubleshot
 
