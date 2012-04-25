@@ -15,47 +15,75 @@
 #
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
-## The gps config appropriate for this device
-PRODUCT_COPY_FILES += device/common/gps/gps.conf_US:system/etc/gps.conf
-
-## recovery and custom charging
-PRODUCT_COPY_FILES += \
-    device/htc/doubleshot/recovery/sbin/choice_fn:recovery/root/sbin/choice_fn \
-    device/htc/doubleshot/recovery/sbin/power_test:recovery/root/sbin/power_test \
-    device/htc/doubleshot/recovery/sbin/offmode_charging:recovery/root/sbin/offmode_charging \
-    device/htc/doubleshot/recovery/sbin/detect_key:recovery/root/sbin/detect_key \
-    device/htc/doubleshot/recovery/sbin/htcbatt:recovery/root/sbin/htcbatt
-
-## ramdisk stuffs
-PRODUCT_COPY_FILES += \
-    device/htc/doubleshot/prebuilt/init:root/init \
-    device/htc/doubleshot/init.doubleshot.rc:root/init.doubleshot.rc \
-    device/htc/doubleshot/ueventd.doubleshot.rc:root/ueventd.doubleshot.rc
-
-# Vendor inheritance
-$(call inherit-product-if-exists, vendor/htc/doubleshot/doubleshot-vendor.mk)
-
-## misc
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.setupwizard.enable_bypass=1 \
-    dalvik.vm.lockprof.threshold=500 \
-    ro.com.google.locationfeatures=1 \
-    dalvik.vm.dexopt-flags=m=y
-
-## overlays
 DEVICE_PACKAGE_OVERLAYS += device/htc/doubleshot/overlay
-
-# Permissions
-PRODUCT_COPY_FILES += \
-    frameworks/base/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml
 
 # GPS and Light
 PRODUCT_PACKAGES += \
     gps.doubleshot \
     lights.doubleshot
 
-## dsp Audio
+# Torch
+PRODUCT_PACKAGES += \
+    Torch
+
+## The gps config appropriate for this device
+PRODUCT_COPY_FILES += device/common/gps/gps.conf_US:system/etc/gps.conf
+
+# Bluetooth
+PRODUCT_COPY_FILES += \
+    device/htc/msm8660-common/firmware/bcm4329.hcd:system/vendor/firmware/bcm4329.hcd
+
+# Wifi
+$(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4329/device-bcm.mk)
+
+# Boot ramdisk setup
+PRODUCT_COPY_FILES += \
+	device/htc/doubleshot/prebuilt/init:root/init \
+	device/htc/doubleshot/ramdisk/init.doubleshot.rc:root/init.doubleshot.rc \
+    device/htc/doubleshot/ramdisk/init.doubleshot.usb.rc:root/init.doubleshot.usb.rc \
+	device/htc/doubleshot/ramdisk/ueventd.doubleshot.rc:root/ueventd.doubleshot.rc
+
+## recovery and custom charging
+PRODUCT_COPY_FILES += \
+    device/htc/doubleshot/prebuilt/init:recovery/root/init \
+    device/htc/doubleshot/recovery/sbin/choice_fn:recovery/root/sbin/choice_fn \
+    device/htc/doubleshot/recovery/sbin/power_test:recovery/root/sbin/power_test \
+    device/htc/doubleshot/recovery/sbin/offmode_charging:recovery/root/sbin/offmode_charging \
+    device/htc/doubleshot/recovery/sbin/detect_key:recovery/root/sbin/detect_key \
+    device/htc/doubleshot/recovery/sbin/htcbatt:recovery/root/sbin/htcbatt
+
+# Some misc configeration files
+PRODUCT_COPY_FILES += \
+	device/htc/doubleshot/vold.fstab:system/etc/vold.fstab
+
+# Keylayouts and Keychars
+PRODUCT_COPY_FILES += \
+	device/htc/doubleshot/keylayout/AVRCP.kl:system/usr/keylayout/AVRCP.kl \
+	device/htc/doubleshot/keylayout/doubleshot-keypad.kl:system/usr/keylayout/doubleshot-keypad.kl \
+	device/htc/doubleshot/keylayout/doubleshot-keypad-v0.kl:system/usr/keylayout/doubleshot-keypad-v0.kl \
+	device/htc/doubleshot/keylayout/h2w_headset.kl:system/usr/keylayout/h2w_headset.kl \
+	device/htc/doubleshot/keylayout/qwerty.kl:system/usr/keylayout/qwerty.kl \
+	device/htc/doubleshot/keychars/doubleshot-keypad.kcm:system/usr/keychars/doubleshot-keypad.kcm \
+	device/htc/doubleshot/keychars/BT_HID.kcm.bin:system/usr/keychars/BT_HID.kcm.bin \
+	device/htc/doubleshot/keychars/doubleshot-keypad-v0.kcm.bin:system/usr/keychars/doubleshot-keypad-v0.kcm.bin \
+	device/htc/doubleshot/keychars/doubleshot-keypad.kcm.bin:system/usr/keychars/doubleshot-keypad.kcm.bin \
+	device/htc/doubleshot/keychars/qwerty.kcm.bin:system/usr/keychars/qwerty.kcm.bin \
+	device/htc/doubleshot/keychars/qwerty2.kcm.bin:system/usr/keychars/qwerty2.kcm.bin
+
+# Input device config
+PRODUCT_COPY_FILES += \
+	device/htc/doubleshot/idc/atmel-touchscreen.idc:system/usr/idc/atmel-touchscreen.idc \
+	device/htc/doubleshot/idc/synaptics-rmi-touchscreen.idc:system/usr/idc/synaptics-rmi-touchscreen.idc
+
+# HTC BT Audio tune
+PRODUCT_COPY_FILES += device/htc/doubleshot/configs/AudioBTID.csv:system/etc/AudioBTID.csv
+
+# QC thermald config
+PRODUCT_COPY_FILES += device/htc/doubleshot/configs/thermald.conf:system/etc/thermald.conf
+
+# Sound configs
 PRODUCT_COPY_FILES += \
     device/htc/doubleshot/dsp/AIC3254_REG.csv:system/etc/AIC3254_REG.csv \
     device/htc/doubleshot/dsp/AIC3254_REG_DualMic.csv:system/etc/AIC3254_REG_DualMic.csv \
@@ -83,54 +111,42 @@ PRODUCT_COPY_FILES += \
     device/htc/doubleshot/dsp/soundimage/srsfx_trumedia_music.cfg:system/etc/soundimage/srsfx_trumedia_music.cfg \
     device/htc/doubleshot/dsp/soundimage/srsfx_trumedia_voice.cfg:system/etc/soundimage/srsfx_trumedia_voice.cfg
 
-# keylayouts
+# Permissions
 PRODUCT_COPY_FILES += \
-    device/htc/doubleshot/keylayout/AVRCP.kl:system/usr/keylayout/AVRCP.kl \
-    device/htc/doubleshot/keylayout/BT_HID.kl:system/usr/keylayout/BT_HID.kl \
-    device/htc/doubleshot/keylayout/doubleshot-keypad-v0.kl:system/usr/keylayout/doubleshot-keypad-v0.kl \
-    device/htc/doubleshot/keylayout/doubleshot-keypad.kl:system/usr/keylayout/doubleshot-keypad.kl \
-    device/htc/doubleshot/keylayout/h2w_headset.kl:system/usr/keylayout/h2w_headset.kl \
-    device/htc/doubleshot/keylayout/qwerty.kl:system/usr/keylayout/qwerty.kl
+    frameworks/base/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml
 
-# Keychars
-PRODUCT_COPY_FILES += \
-    device/htc/doubleshot/keychars/BT_HID.kcm.bin:system/usr/keychars/BT_HID.kcm.bin \
-    device/htc/doubleshot/keychars/doubleshot-keypad.kcm:system/usr/keychars/doubleshot-keypad.kcm \
-    device/htc/doubleshot/keychars/qwerty.kcm.bin:system/usr/keychars/qwerty.kcm.bin \
-    device/htc/doubleshot/keychars/qwerty2.kcm.bin:system/usr/keychars/qwerty2.kcm.bin
+## misc
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.setupwizard.enable_bypass=1 \
+    dalvik.vm.lockprof.threshold=500 \
+    ro.com.google.locationfeatures=1 \
+    dalvik.vm.dexopt-flags=m=y
 
-# idc
-PRODUCT_COPY_FILES += \
-    device/htc/doubleshot/idc/atmel-touchscreen.idc:system/usr/idc/atmel-touchscreen.idc \
-    device/htc/doubleshot/idc/synaptics-rmi-touchscreen.idc:system/usr/idc/synaptics-rmi-touchscreen.idc
+# Device uses high-density artwork where available
+PRODUCT_AAPT_CONFIG := normal hdpi
+PRODUCT_AAPT_PREF_CONFIG := hdpi
+PRODUCT_LOCALES += en_US hdpi
 
-# HTC BT Audio tune
-PRODUCT_COPY_FILES += device/htc/doubleshot/configs/AudioBTID.csv:system/etc/AudioBTID.csv
-
-# QC thermald config
-PRODUCT_COPY_FILES += device/htc/doubleshot/configs/thermald.conf:system/etc/thermald.conf
-
-# misc
-PRODUCT_COPY_FILES += \
-    device/htc/doubleshot/vold.fstab:system/etc/vold.fstab
-
-# Kernel and modules
 ifeq ($(TARGET_PREBUILT_KERNEL),)
-	LOCAL_KERNEL := device/htc/doubleshot/prebuilt/kernel
+LOCAL_KERNEL := device/htc/doubleshot/prebuilt/kernel
 else
-	LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
+LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel \
 	device/htc/doubleshot/prebuilt/bcm4329.ko:system/lib/modules/bcm4329.ko
 
+# call the proprietary setup
+$(call inherit-product-if-exists, vendor/htc/doubleshot/doubleshot-vendor.mk)
+
 # common msm8660 configs
 $(call inherit-product, device/htc/msm8660-common/msm8660.mk)
+
+# media profiles and capabilities spec
+$(call inherit-product, device/htc/doubleshot/media_a1026.mk)
 
 ## htc audio settings
 $(call inherit-product, device/htc/doubleshot/media_htcaudio.mk)
 
 $(call inherit-product, frameworks/base/build/phone-xhdpi-1024-dalvik-heap.mk)
-
-$(call inherit-product-if-exists, vendor/htc/doubleshot/doubleshot-vendor.mk)

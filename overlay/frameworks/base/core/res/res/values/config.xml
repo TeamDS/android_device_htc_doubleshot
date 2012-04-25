@@ -37,7 +37,10 @@
     <integer name="config_defaultNotificationLedOff">9000</integer>
 
     <!-- Our amoled doesn't animate well. -->
-    <bool name="config_animateScreenLights">false</bool>
+    <bool name="config_animateScreenLights">true</bool>
+
+    <!-- disable menu hard key on Pyramid in non-pattern lockscreen -->
+    <bool name="config_disableMenuKeyInLockScreen">true</bool>
 
     <!-- Control whether being in the desk dock (and powered) always
          keeps the screen on.  By default it stays on when plugged in to
@@ -170,7 +173,7 @@
          Wifi interfaces.  If the device doesn't want to support tethering over Wifi this
          should be empty.  An example would be "softap.*" -->
     <string-array translatable="false" name="config_tether_wifi_regexs">
-        <item>"wl0.1"</item>
+        <item>"wlan\\d"</item>
     </string-array>
 
     <!-- List of regexpressions describing the interface (if any) that represent tetherable

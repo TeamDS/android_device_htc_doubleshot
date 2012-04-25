@@ -1,14 +1,23 @@
-$(call inherit-product, device/htc/doubleshot/full_doubleshot.mk)
+# Specify phone tech before including full_phone
+$(call inherit-product, vendor/cm/config/gsm.mk)
 
-PRODUCT_RELEASE_NAME := Doubleshot
+# Release name
+PRODUCT_RELEASE_NAME := doubleshot
+
+
 
 # Inherit some common CM stuff.
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
-# Inherit some common CM stuff.
-$(call inherit-product, vendor/cm/config/gsm.mk)
+# Inherit device configuration
+$(call inherit-product, device/htc/doubleshot/device_doubleshot.mk)
 
-PRODUCT_BUILD_PROP_OVERRIDES += PRODUCT_NAME=htc_doubleshot BUILD_ID=GRJ22 BUILD_DISPLAY_ID=GRJ22 BUILD_FINGERPRINT="tmous/htc_doubleshot/doubleshot:2.3.4/GRJ22/100058:user/release-keys" PRIVATE_BUILD_DESC="1.45.531.1 CL100058 release-keys"
-
-PRODUCT_NAME := cm_doubleshot
+# Device naming
 PRODUCT_DEVICE := doubleshot
+PRODUCT_NAME := cm_doubleshot
+PRODUCT_BRAND := htc
+PRODUCT_MODEL := myTouch_4G_Slide
+PRODUCT_MANUFACTURER := HTC
+
+# Set build fingerprint / ID / Product Name ect.
+PRODUCT_BUILD_PROP_OVERRIDES += PRODUCT_NAME=htc_doubleshot BUILD_FINGERPRINT=tmous/htc_doubleshot/doubleshot:4.0.3/IML74K/275847.101:user/release-keys PRIVATE_BUILD_DESC="3.25.401.101 CL275847 release-keys" BUILD_NUMBER=275847

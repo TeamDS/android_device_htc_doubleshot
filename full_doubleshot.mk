@@ -11,33 +11,29 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
- 
+
 #
 # This file is the build configuration for a full Android
-# build for maguro hardware. This cleanly combines a set of
+# build for dobuleshot hardware. This cleanly combines a set of
 # device-specific aspects (drivers) with a device-agnostic
-# product configuration (apps). Except for a few implementation
-# details, it only fundamentally contains two inherit-product
-# lines, full and maguro, hence its name.
+# product configuration (apps).
 #
- 
+
 # Get the long list of APNs
-PRODUCT_COPY_FILES := device/sample/etc/apns-full-conf.xml:system/etc/apns-conf.xml
- 
+PRODUCT_COPY_FILES += device/sample/etc/apns-full-conf.xml:system/etc/apns-conf.xml
+
 # Camera
-PRODUCT_PACKAGES := \
+PRODUCT_PACKAGES += \
     Camera
 
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
-# This is where we'd set a backup provider if we had one
-#$(call inherit-product, device/sample/products/backup_overlay.mk)
-# Inherit from maguro device
-$(call inherit-product, device/htc/doubleshot/device.mk)
+
+# Inherit from doubleshot device
+$(call inherit-product, device/htc/doubleshot/device_doubleshot.mk)
 
 # Set those variables here to overwrite the inherited values.
 PRODUCT_NAME := full_doubleshot
 PRODUCT_DEVICE := doubleshot
 PRODUCT_BRAND := HTC
-PRODUCT_MANUFACTURER := HTC
 PRODUCT_MODEL := myTouch_4G_Slide
