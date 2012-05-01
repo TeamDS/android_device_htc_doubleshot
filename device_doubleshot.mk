@@ -67,10 +67,8 @@ PRODUCT_COPY_FILES += \
 	device/htc/doubleshot/keylayout/qwerty.kl:system/usr/keylayout/qwerty.kl \
 	device/htc/doubleshot/keychars/doubleshot-keypad.kcm:system/usr/keychars/doubleshot-keypad.kcm \
 	device/htc/doubleshot/keychars/BT_HID.kcm.bin:system/usr/keychars/BT_HID.kcm.bin \
-	device/htc/doubleshot/keychars/doubleshot-keypad-v0.kcm.bin:system/usr/keychars/doubleshot-keypad-v0.kcm.bin \
-	device/htc/doubleshot/keychars/doubleshot-keypad.kcm.bin:system/usr/keychars/doubleshot-keypad.kcm.bin \
-	device/htc/doubleshot/keychars/qwerty.kcm.bin:system/usr/keychars/qwerty.kcm.bin \
-	device/htc/doubleshot/keychars/qwerty2.kcm.bin:system/usr/keychars/qwerty2.kcm.bin
+	device/htc/doubleshot/keychars/qwerty.kcm:system/usr/keychars/qwerty.kcm \
+	device/htc/doubleshot/keychars/qwerty2.kcm:system/usr/keychars/qwerty2.kcm
 
 # Input device config
 PRODUCT_COPY_FILES += \
