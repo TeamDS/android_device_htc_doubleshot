@@ -22,7 +22,8 @@ DEVICE_PACKAGE_OVERLAYS += device/htc/doubleshot/overlay
 # GPS and Light
 PRODUCT_PACKAGES += \
     gps.doubleshot \
-    lights.doubleshot
+    lights.doubleshot \
+    sensors.doubleshot
 
 # Torch
 PRODUCT_PACKAGES += \
