@@ -59,3 +59,6 @@ TARGET_RECOVERY_UI_LIB := librecovery_ui_doubleshot
 BOARD_CUSTOM_GRAPHICS:= ../../../device/htc/doubleshot/recovery/graphics.c
 BOARD_USES_MMCUTILS := true
 BOARD_HAS_NO_MISC_PARTITION := true
+
+# multitouch games need this:
+BOARD_USE_LEGACY_TOUCHSCREEN := true
