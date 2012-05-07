@@ -32,6 +32,10 @@ PRODUCT_PACKAGES += \
 ## The gps config appropriate for this device
 PRODUCT_COPY_FILES += device/common/gps/gps.conf_US:system/etc/gps.conf
 
+## override libaudioflinger.so with a prebuilt from 2012.march that works with blob lib/hw/audio*so files and is compatible with current ds kernel. TODO make kernel compatible with 
+## new audio.msm8660*so of msm8660-common
+PRODUCT_COPY_FILES += device/htc/doubleshot/prebuilt/audioflinger/libaudioflinger.so:system/lib/libaudioflinger.so
+
 # Bluetooth
 PRODUCT_COPY_FILES += \
     device/htc/msm8660-common/firmware/bcm4329.hcd:system/vendor/firmware/bcm4329.hcd
