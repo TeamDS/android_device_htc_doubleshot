@@ -36,6 +36,10 @@ PRODUCT_COPY_FILES += device/common/gps/gps.conf_US:system/etc/gps.conf
 ## new audio.msm8660*so of msm8660-common
 PRODUCT_COPY_FILES += device/htc/doubleshot/prebuilt/audioflinger/libaudioflinger.so:system/lib/libaudioflinger.so
 
+# Media_profiles.xml config - overriding msm8660, to use 31 FPS instead of 30, otherwise camera recording fails
+PRODUCT_COPY_FILES += \
+    device/htc/doubleshot/configs/media_profiles.xml:system/etc/media_profiles.xml
+
 # Bluetooth
 PRODUCT_COPY_FILES += \
     device/htc/msm8660-common/firmware/bcm4329.hcd:system/vendor/firmware/bcm4329.hcd
