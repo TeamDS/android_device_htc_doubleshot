@@ -88,7 +88,7 @@ ro.qualcomm.cabl=1
 ro.com.google.locationfeatures=1
 
 # UMS
-persist.sys.usb.config=mass_storage,adb
+persist.sys.usb.config=mtp,adb
 
 # Don't set /proc/sys/vm/dirty_ratio to 0 when USB mounting
 ro.vold.umsdirtyratio=20

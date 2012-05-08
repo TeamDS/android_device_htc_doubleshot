@@ -124,6 +124,36 @@ on init
     chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors
     chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq
 
+    ## Imported from doubleshot GB init.rc
+    # Permissions for Physical Keyboard
+    chown system system /sys/class/leds/caps/brightness
+    chown system system /sys/class/leds/func/brightness
+
+    # Camera
+    chown media system /sys/android_camera/lensinfo
+    chown media system /sys/android_camera/macrothreshold
+    chown media system /sys/android_camera/node
+    chown media system /sys/android_camera/sensor
+    chown media system /sys/android_camera2/htcwc
+    chown media system /sys/android_camera2/node
+    chown media system /sys/android_camera2/sensor
+    
+    # Camera LEDS
+    chown system system /sys/camera_led_status/
+    chown system system /sys/camera_led_status/led_ril_status
+    chown system system /sys/camera_led_status/led_wimax_status
+    chown system system /sys/camera_led_status/led_hotspot_status
+    chown system system /sys/camera_led_status/low_temp_limit
+    chown system system /sys/camera_led_status/low_cap_limit
+
+    # Other LEDs not set by default
+    chown system system /sys/class/leds/amber/off_timer
+    chown system system /sys/class/leds/green/off_timer
+    
+    # Everything else
+    chown radio system /module/gpio_event/parameters/phone_call_status
+    ##
+ 
     chown system /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy
 
     # for simlock
