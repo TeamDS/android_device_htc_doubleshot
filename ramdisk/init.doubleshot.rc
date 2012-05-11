@@ -198,8 +198,8 @@ on boot
 
 # Assign TCP buffer thresholds to be ceiling value of technology maximums
 # Increased technology maximums should be reflected here.
-    write /proc/sys/net/core/rmem_max  1220608
-    write /proc/sys/net/core/wmem_max  1220608
+    write /proc/sys/net/core/rmem_max  3461120
+    write /proc/sys/net/core/wmem_max  3461120
 
 # Force loading of modem and Q6 images
 service load-modem /system/bin/load-modem.sh
@@ -211,15 +211,23 @@ service wpa_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant -Dwext 
 #   user wifi
 #   group wifi inet keystore
 #    socket wpa_wlan0 dgram 660 wifi wifi
+    class late_start
     socket wpa_wlan0 dgram 660 wifi wifi
     disabled
     oneshot
 
 service dhcpcd_wlan0 /system/bin/dhcpcd -ABKL
+    class main
     disabled
     oneshot
 
 service dhcpcd_p2p /system/bin/dhcpcd -aABKL
+    class late_start
+    disabled
+    oneshot
+
+service dhcpcd_bnep0 /system/bin/dhcpcd -ABKL
+    class late_start
     disabled
     oneshot
 
@@ -234,6 +242,17 @@ service iprenew_wlan0 /system/bin/dhcpcd -n
     class late_start
     disabled
     oneshot
+
+service iprenew_p2p /system/bin/dhcpcd -n
+    class late_start
+    disabled
+    oneshot
+
+service iprenew_bnep0 /system/bin/dhcpcd -n
+    class late_start
+    disabled
+    oneshot
+
 
 # bugreport is triggered by the KEY_BACK and KEY_MENU keycodes
 service bugreport /system/bin/dumpstate -d -v -o /sdcard/bugreports/bugreport
@@ -277,19 +296,24 @@ service htcbatt /system/bin/htcbatt
     class late_start
     user root
 
-service mpdecision /system/bin/mpdecision --no_sleep --avg_comp --single_core_while_panel_off
-    class late_start
+service mpdecision /system/bin/mpdecision --Nw 5.4 --Ts 350 --no_sleep --avg_comp --single_core_while_panel_off
+    class main
     user root
     disabled
 
 service thermald /system/bin/thermald
-    class late_start
+    class main
+    user root
+    group root
+    disabled
+
+service qcom-post-boot /system/bin/sh /system/etc/init.qcom.post_boot.sh
+    class main
     user root
     disabled
 
 on property:init.svc.bootanim=stopped
-    start thermald
-    start mpdecision
+    start qcom-post-boot
 
 service htc_ebdlogd /system/bin/htc_ebdlogd -s -k -P 7 -n 10 -N 10
     user root
@@ -313,11 +337,12 @@ on property:ro.build.tags=release-keys
 service qmuxd /system/bin/qmuxd
     class late_start
     user radio
-    group radio audio
+    group radio audio bluetooth gps
 
 service netmgrd /system/bin/netmgrd
     class late_start
 
 on property:sys.radio.shutdown=true
-    write /sys/devices/platform/rs300000a7.65536/force_sync 1
-    write /sys/devices/platform/rs300100a7.65536/force_sync 1
+   exec /system/bin/sh /system/etc/init.qcom.efs.sync.sh
+   user root
+   group root
