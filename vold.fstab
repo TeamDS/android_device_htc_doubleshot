@@ -15,4 +15,4 @@
 ######################
 
 # Mounts the first usable partition of the specified device
-dev_mount sdcard /mnt/sdcard auto /devices/platform/msm_sdcc.3/mmc_host
+dev_mount sdcard /mnt/sdcard auto /devices/platform/msm_sdcc.3/mmc_host/mmc1
