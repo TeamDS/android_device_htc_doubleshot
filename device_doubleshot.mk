@@ -17,9 +17,6 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
-# common msm8660 configs
-$(call inherit-product, device/htc/msm8660-common/msm8660.mk)
-
 DEVICE_PACKAGE_OVERLAYS += device/htc/doubleshot/overlay
 
 # GPS and Light
@@ -150,6 +147,9 @@ PRODUCT_COPY_FILES += \
 
 # call the proprietary setup
 $(call inherit-product-if-exists, vendor/htc/doubleshot/doubleshot-vendor.mk)
+
+# common msm8660 configs
+$(call inherit-product, device/htc/msm8660-common/msm8660.mk)
 
 # media profiles and capabilities spec
 $(call inherit-product, device/htc/doubleshot/media_a1026.mk)
