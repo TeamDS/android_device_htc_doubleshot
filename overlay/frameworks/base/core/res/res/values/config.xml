@@ -37,7 +37,7 @@
     <integer name="config_defaultNotificationLedOff">9000</integer>
 
     <!-- Our amoled doesn't animate well. -->
-    <bool name="config_animateScreenLights">true</bool>
+    <bool name="config_animateScreenLights">false</bool>
 
     <!-- disable menu hard key on Pyramid in non-pattern lockscreen -->
     <bool name="config_disableMenuKeyInLockScreen">true</bool>
@@ -56,7 +56,7 @@
 
     <!-- Flag indicating whether we should enable the automatic brightness in Settings.
          config_hardware_automatic_brightness_available is not set, so we will use software implementation -->
-    <bool name="config_automatic_brightness_available">false</bool>
+    <bool name="config_automatic_brightness_available">true</bool>
 
     <!-- Array of light sensor LUX values to define our levels for auto backlight brightness support.
          The N entries of this array define N + 1 zones as follows:
@@ -130,6 +130,9 @@
         <item>0</item>
         <item>0</item>
     </integer-array>
+
+<!-- Needed for capacitive buttons to work without toggling auto-brightness -->
+    <bool name="config_autoBrightnessButtonKeyboard">false</bool>
 
     <!-- Minimum screen brightness allowed by the power manager. -->
     <integer name="config_screenBrightnessDim">10</integer>
