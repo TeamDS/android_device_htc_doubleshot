@@ -88,9 +88,6 @@ PRODUCT_COPY_FILES += \
 # HTC BT Audio tune
 PRODUCT_COPY_FILES += device/htc/doubleshot/configs/AudioBTID.csv:system/etc/AudioBTID.csv
 
-# QC thermald config
-PRODUCT_COPY_FILES += device/htc/doubleshot/configs/thermald.conf:system/etc/thermald.conf
-
 # Sound configs
 PRODUCT_COPY_FILES += \
     device/htc/doubleshot/dsp/AIC3254_REG.csv:system/etc/AIC3254_REG.csv \
