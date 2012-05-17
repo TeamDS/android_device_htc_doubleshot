@@ -143,7 +143,7 @@ endif
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel \
-	device/htc/doubleshot/prebuilt/bcm4329.ko:system/lib/modules/bcm4329.ko
+	device/htc/doubleshot/prebuilt/bcmdhd.ko:system/lib/modules/bcmdhd.ko
 
 # call the proprietary setup
 $(call inherit-product-if-exists, vendor/htc/doubleshot/doubleshot-vendor.mk)
