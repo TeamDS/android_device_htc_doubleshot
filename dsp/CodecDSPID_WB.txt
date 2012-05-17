@@ -1,11 +1,11 @@
 Header, PYD_soundeffet_2011_0328
 ## Group for phone ##
-Phone_Default,/system/etc/soundimage/Sound_Phone_Original_HP.txt
-Phone_Handset_Dualmic,/system/etc/soundimage/Sound_Phone_Original_REC.txt
-Phone_Speaker_Dualmic,/system/etc/soundimage/Sound_Phone_Original_SPK.txt
-Phone_Headset,/system/etc/soundimage/Sound_Phone_Original_HP.txt
-Phone_HAC,/system/etc/soundimage/Sound_Phone_Original_REC.txt
-Phone_TTY,/system/etc/soundimage/Sound_Phone_Original_HP.txt
+Phone_Default,/system/etc/soundimage/Sound_Phone_Original_HP_WB.txt
+Phone_Handset_Dualmic,/system/etc/soundimage/Sound_Phone_Original_REC_WB.txt
+Phone_Speaker_Dualmic,/system/etc/soundimage/Sound_Phone_Original_SPK_WB.txt
+Phone_Headset,/system/etc/soundimage/Sound_Phone_Original_HP_WB.txt
+Phone_HAC,/system/etc/soundimage/Sound_Phone_Original_REC_WB.txt
+Phone_TTY,/system/etc/soundimage/Sound_Phone_Original_HP_WB.txt
 
 ## Group for playback ## 
 Playback_Default,/system/etc/soundimage/Sound_Original.txt

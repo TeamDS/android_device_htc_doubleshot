@@ -1444,3 +1444,15 @@ w 30 42 00 # Right DAC Channel Digital Volume Control Register
 w 30 44 1f # DRC Control Register 1
 w 30 45 00 # DRC Control Register 2
 w 30 46 c6 # DRC Control Register 3
+w 30 00 01
+w 30 10 00
+w 30 11 00
+w 30 12 00
+w 30 13 00
+w 30 09 00
+w 30 00 00
+w 30 51 00
+w 30 3F 16
+w 30 00 01
+w 30 01 00
+w 30 02 28

@@ -1,7 +1,7 @@
-Header, PYD_soundeffet_2011_0328
+Header, PYD_soundeffet_2011_0710
 ## Group for phone ##
 Phone_Default,/system/etc/soundimage/Sound_Phone_Original_HP.txt
-Phone_Handset_Dualmic,/system/etc/soundimage/Sound_Phone_Original_REC.txt
+Phone_Handset_Dualmic,/system/etc/soundimage/Sound_Phone_Original_REC_NEL.txt
 Phone_Speaker_Dualmic,/system/etc/soundimage/Sound_Phone_Original_SPK.txt
 Phone_Headset,/system/etc/soundimage/Sound_Phone_Original_HP.txt
 Phone_HAC,/system/etc/soundimage/Sound_Phone_Original_REC.txt
