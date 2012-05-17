@@ -7,7 +7,7 @@ on boot
     write /sys/class/android_usb/android0/f_rndis/vendorID 0bb4
     write /sys/class/android_usb/android0/f_rndis/wceis 1
 
-on property:sys.usb.config=mtp
+on property:sys.usb.config=mass_storage
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor 0bb4
     write /sys/class/android_usb/android0/idProduct 0c86
@@ -15,7 +15,7 @@ on property:sys.usb.config=mtp
     write /sys/class/android_usb/android0/enable 1
     setprop sys.usb.state $sys.usb.config
 
-on property:sys.usb.config=mtp,adb
+on property:sys.usb.config=mass_storage,adb
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor 0bb4
     write /sys/class/android_usb/android0/idProduct 0c86
