@@ -17,6 +17,9 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
+# common msm8660 configs
+$(call inherit-product, device/htc/msm8660-common/msm8660.mk)
+
 DEVICE_PACKAGE_OVERLAYS += device/htc/doubleshot/overlay
 
 # GPS and Light
@@ -31,14 +34,6 @@ PRODUCT_PACKAGES += \
 
 ## The gps config appropriate for this device
 PRODUCT_COPY_FILES += device/common/gps/gps.conf_US:system/etc/gps.conf
-
-## override libaudioflinger.so with a prebuilt from 2012.march that works with blob lib/hw/audio*so files and is compatible with current ds kernel. TODO make kernel compatible with 
-## new audio.msm8660*so of msm8660-common
-PRODUCT_COPY_FILES += device/htc/doubleshot/prebuilt/audioflinger/libaudioflinger.so:system/lib/libaudioflinger.so
-
-# Media_profiles.xml config - overriding msm8660, to use 31 FPS instead of 30, otherwise camera recording fails
-PRODUCT_COPY_FILES += \
-    device/htc/doubleshot/configs/media_profiles.xml:system/etc/media_profiles.xml
 
 # Bluetooth
 PRODUCT_COPY_FILES += \
@@ -120,6 +115,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml
 
+# Custom media config for HTC camera
+PRODUCT_COPY_FILES += \
+    device/htc/doubleshot/configs/media_profiles.xml:system/etc/media_profiles.xml
+
 ## misc
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.setupwizard.enable_bypass=1 \
@@ -145,8 +144,6 @@ PRODUCT_COPY_FILES += \
 # call the proprietary setup
 $(call inherit-product-if-exists, vendor/htc/doubleshot/doubleshot-vendor.mk)
 
-# common msm8660 configs
-$(call inherit-product, device/htc/msm8660-common/msm8660.mk)
 
 # media profiles and capabilities spec
 $(call inherit-product, device/htc/doubleshot/media_a1026.mk)
