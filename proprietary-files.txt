@@ -28,9 +28,6 @@ lib/egl/libEGL_adreno200.so
 lib/egl/libGLESv1_CM_adreno200.so
 lib/egl/libGLESv2_adreno200.so
 lib/egl/libq3dtools_adreno200.so
-lib/hw/audio.a2dp.default.so
-lib/hw/audio.primary.default.so
-lib/hw/audio_policy.default.so
 lib/hw/camera.default.so
 lib/libC2D2.so
 lib/libOlaEngine.so
