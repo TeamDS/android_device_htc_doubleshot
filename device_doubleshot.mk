@@ -27,6 +27,10 @@ $(call inherit-product, device/htc/msm8660-common/msm8660.mk)
 
 DEVICE_PACKAGE_OVERLAYS += device/htc/doubleshot/overlay
 
+## override libaudioflinger.so with a prebuilt from 2012.march that works with blob lib/hw/audio*so files and is compatible with current ds kernel. TODO make kernel compatible with.
+## new audio.msm8660*so of msm8660-common
+PRODUCT_COPY_FILES += device/htc/doubleshot/prebuilt/audioflinger/libaudioflinger.so:system/lib/libaudioflinger.so
+
 # GPS and Light
 PRODUCT_PACKAGES += \
     gps.doubleshot \
