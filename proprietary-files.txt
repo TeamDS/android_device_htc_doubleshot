@@ -49,13 +49,11 @@ lib/libdiag.so
 lib/libdll.so
 lib/libdsi_netctrl.so
 lib/libdsutils.so
-lib/libganril.so
 lib/libgemini.so
 lib/libgsl.so
 lib/libhtc_acoustic.so
 lib/libhtc_ril.so
 lib/libidl.so
-lib/libkineto.so
 lib/libmllite.so
 lib/libmlplatform.so
 lib/libmm-color-convertor.so
@@ -69,8 +67,11 @@ lib/libposteffect.so
 lib/libqdp.so
 lib/libqmi.so
 lib/libqmiservices.so
-lib/librilswitch.so
 lib/libsc-a2xx.so
 lib/libv8.so
 lib/libwebkitaccel.so
 xbin/wireless_modem
+app/HTC-PYRTM-ICS-4.0.1-2.3-49986-4.3.apk
+lib/libganril.so
+lib/libkineto.so
+lib/librilswitch.so
