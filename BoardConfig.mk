@@ -37,7 +37,6 @@ BOARD_KERNEL_CMDLINE := no_console_suspend=1
 TARGET_PREBUILT_KERNEL := device/htc/doubleshot/prebuilt/kernel
 
 # QCOM Gralloc/Copybit/HWcomposer
-TARGET_USES_OVERLAY := false
 COMMON_GLOBAL_CFLAGS += -DQCOM_ROTATOR_KERNEL_FORMATS -DUSES_AUDIO_WITH_NO_FM_VOLUME
 
 #Camera
@@ -63,6 +62,3 @@ BOARD_HAS_NO_MISC_PARTITION := true
 
 # multitouch games need this:
 BOARD_USE_LEGACY_TOUCHSCREEN := true
-
-
-#BOARD_USES_AUDIO_LEGACY := true
