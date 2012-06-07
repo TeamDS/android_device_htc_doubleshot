@@ -123,6 +123,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/htc/doubleshot/configs/media_profiles.xml:system/etc/media_profiles.xml
 
+# Custom media config for cm dsp
+PRODUCT_COPY_FILES += \
+    device/htc/doubleshot/configs/audio_effects.conf:system/etc/audio_effects.conf
+
 ## misc
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.setupwizard.enable_bypass=1 \
