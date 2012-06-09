@@ -111,7 +111,7 @@ key 142   POWER             WAKE
 key 143   POWER             WAKE
 key 150   EXPLORER
 key 152   POWER             WAKE
-key 158   BACK              WAKE_DROPPED
+key 158   BACK
 key 159   FORWARD
 key 169   CALL
 key 172   HOME
@@ -124,6 +124,7 @@ key 185   BACK
 key 186   HOME
 key 187   MENU
 key 188   SEARCH
+key 193   DPAD_CENTER       WAKE_DROPPED
 key 211   FOCUS
 key 212   CAMERA
 key 214 BUTTON_R2
