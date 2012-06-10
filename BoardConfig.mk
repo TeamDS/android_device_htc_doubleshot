@@ -37,6 +37,9 @@ BOARD_KERNEL_CMDLINE := no_console_suspend=1
 TARGET_KERNEL_CONFIG := doubleshot_defconfig
 TARGET_KERNEL_SOURCE := kernel/htc/doubleshot
 
+WIFI_DRIVER_MODULE_NAME          := bcmdhd
+WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/bcmdhd.ko"
+
 # QCOM Gralloc/Copybit/HWcomposer
 COMMON_GLOBAL_CFLAGS += -DQCOM_ROTATOR_KERNEL_FORMATS -DUSES_AUDIO_WITH_NO_FM_VOLUME
 
