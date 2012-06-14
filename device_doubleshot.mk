@@ -141,16 +141,6 @@ PRODUCT_AAPT_CONFIG := normal hdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
 PRODUCT_LOCALES += en_US hdpi
 
-ifeq ($(TARGET_PREBUILT_KERNEL),)
-LOCAL_KERNEL := device/htc/doubleshot/prebuilt/kernel
-else
-LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
-endif
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_KERNEL):kernel \
-	device/htc/doubleshot/prebuilt/bcmdhd.ko:system/lib/modules/bcmdhd.ko
-
 # call the proprietary setup
 $(call inherit-product-if-exists, vendor/htc/doubleshot/doubleshot-vendor.mk)
 
