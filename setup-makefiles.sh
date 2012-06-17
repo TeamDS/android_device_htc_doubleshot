@@ -42,13 +42,6 @@ for FILE in `egrep -v '(^#|^$)' proprietary-files.txt`; do
   echo "  $OUTDIR/proprietary/$FILE:system/$FILE$LINEEND" >> $MAKEFILE
 done
 
-(cat << EOF) >> $MAKEFILE
-# using blobs for audio, overwriting unfilterable inherited msm8660common audio hal modules
-PRODUCT_COPY_FILES += \\
-	$OUTDIR/proprietary/lib/hw/audio_policy.default.so:system/lib/hw/audio_policy.msm8660.so \\
-	$OUTDIR/proprietary/lib/hw/audio.primary.default.so:system/lib/hw/audio.primary.msm8660.so
-EOF
-
 
 (cat << EOF) > ../../../$OUTDIR/$DEVICE-vendor.mk
 # Copyright (C) 2011 The CyanogenMod Project
