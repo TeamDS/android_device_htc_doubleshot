@@ -123,7 +123,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/htc/doubleshot/configs/media_profiles.xml:system/etc/media_profiles.xml
 
-
 ## misc
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.setupwizard.enable_bypass=1 \
