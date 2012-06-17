@@ -14,11 +14,6 @@
 # limitations under the License.
 #
 
-# Custom media config for cm dsp
-PRODUCT_COPY_FILES += \
-    device/htc/doubleshot/configs/audio_effects.conf:system/etc/audio_effects.conf
-
-
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
