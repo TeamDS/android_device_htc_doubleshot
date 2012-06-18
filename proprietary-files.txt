@@ -9,7 +9,6 @@ bin/htc_ebdlogd
 bin/htcbatt
 bin/ip
 bin/ipd
-bin/load-modem.sh
 bin/logcat2
 bin/lsc_camera
 bin/netmgrd

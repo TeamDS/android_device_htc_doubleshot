@@ -6,12 +6,6 @@ on early-init
     # for backwards compatibility
     symlink /mnt/sdcard /sdcard
 
-on early-fs
-    mkdir /system
-    mkdir /data 0771 system system
-    mkdir /cache 0770 system cache
-    mkdir /devlog 0700 root root
-
     #8x60: firmware
     rm /vendor
     mkdir /vendor               0771 system system
@@ -42,6 +36,16 @@ on early-fs
     symlink /vendor/firmware/misc/modem.b01 /vendor/firmware/modem.b01
     symlink /vendor/firmware/misc/modem.b00 /vendor/firmware/modem.b00
     symlink /vendor/firmware/misc/modem.mdt /vendor/firmware/modem.mdt
+
+    # Force loading of modem and Q6 images
+    write /dev/smd_pkt_loopback 1
+
+on early-fs
+    mkdir /system
+    mkdir /data 0771 system system
+    mkdir /cache 0770 system cache
+    mkdir /devlog 0700 root root
+
 
     symlink /system/vendor/firmware/fw_bcmdhd.bin /vendor/firmware/fw_bcmdhd.bin
     symlink /system/vendor/firmware/fw_bcmdhd_apsta.bin /vendor/firmware/fw_bcmdhd_apsta.bin
@@ -158,7 +162,7 @@ on init
     chown media system /sys/android_camera2/htcwc
     chown media system /sys/android_camera2/node
     chown media system /sys/android_camera2/sensor
-    
+
     # Camera LEDS
     chown system system /sys/camera_led_status/
     chown system system /sys/camera_led_status/led_ril_status
@@ -170,7 +174,7 @@ on init
     # Other LEDs not set by default
     chown system system /sys/class/leds/amber/off_timer
     chown system system /sys/class/leds/green/off_timer
-    
+
     # Everything else
     chown radio system /module/gpio_event/parameters/phone_call_status
     ##
@@ -235,10 +239,6 @@ on boot
 # Increased technology maximums should be reflected here.
     write /proc/sys/net/core/rmem_max  1220608
     write /proc/sys/net/core/wmem_max  1220608
-
-# Force loading of modem and Q6 images
-service load-modem /system/bin/load-modem.sh
-    oneshot
 
 service wpa_supplicant /system/bin/wpa_supplicant \
         -Dnl80211 -iwlan0 -puse_p2p_group_interface=1 -e/data/misc/wifi/entropy.bin
@@ -344,5 +344,3 @@ service netmgrd /system/bin/netmgrd
 
 on property:sys.radio.shutdown=true
    exec /system/bin/sh /system/etc/init.qcom.efs.sync.sh
-   user root
-   group root
