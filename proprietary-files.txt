@@ -7,7 +7,6 @@ bin/charging
 bin/hdmid
 bin/htc_ebdlogd
 bin/htcbatt
-bin/ip
 bin/ipd
 bin/logcat2
 bin/lsc_camera
