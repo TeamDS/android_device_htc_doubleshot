@@ -218,9 +218,6 @@
          specified -->
     <string name="default_wallpaper_component">com.android.phasebeam/.PhaseBeamWallpaper</string>
 
-    <!-- The VoiceMail default value is displayed to my own number if it is true -->
-    <bool name="config_telephony_use_own_number_for_voicemail">true</bool>
-
     <!-- Boolean indicating if current platform supports quick switch-on/off of
          Bluetooth module -->
     <bool name="config_bluetooth_adapter_quick_switch">false</bool>
