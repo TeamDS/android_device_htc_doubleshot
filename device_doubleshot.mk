@@ -68,7 +68,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
 	device/htc/doubleshot/keylayout/AVRCP.kl:system/usr/keylayout/AVRCP.kl \
 	device/htc/doubleshot/keylayout/doubleshot-keypad.kl:system/usr/keylayout/doubleshot-keypad.kl \
-	device/htc/doubleshot/keylayout/doubleshot-keypad-v0.kl:system/usr/keylayout/doubleshot-keypad-v0.kl \
 	device/htc/doubleshot/keylayout/h2w_headset.kl:system/usr/keylayout/h2w_headset.kl \
 	device/htc/doubleshot/keylayout/qwerty.kl:system/usr/keylayout/qwerty.kl \
 	device/htc/doubleshot/keychars/doubleshot-keypad.kcm:system/usr/keychars/doubleshot-keypad.kcm \
