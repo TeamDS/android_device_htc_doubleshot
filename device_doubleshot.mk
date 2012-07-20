@@ -28,10 +28,6 @@ PRODUCT_PACKAGES += \
     lights.doubleshot \
     sensors.doubleshot
 
-# Torch
-PRODUCT_PACKAGES += \
-    Torch
-
 # Wifi Calling
 PRODUCT_PACKAGES += \
     GanOptimizer
