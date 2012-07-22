@@ -218,9 +218,4 @@
          specified -->
     <string name="default_wallpaper_component">com.android.phasebeam/.PhaseBeamWallpaper</string>
 
-    <!-- Boolean indicating if current platform supports quick switch-on/off of
-         Bluetooth module -->
-    <bool name="config_bluetooth_adapter_quick_switch">false</bool>
-
-
 </resources>
