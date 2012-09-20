@@ -272,7 +272,7 @@ service bugreport /system/bin/dumpstate -d -v -o /sdcard/bugreports/bugreport
 
 service hciattach /system/bin/brcm_patchram_plus --enable_hci \
         --tosleep 50000 --baudrate 3000000 --use_baudrate_for_download \
-        --patchram /vendor/firmware/bcm4329.hcd /dev/ttyHS0
+        --patchram /vendor/firmware/bcm4329.hcd --enable_lpm /dev/ttyHS0
     class main
     user bluetooth
     group bluetooth net_bt_admin
@@ -287,17 +287,6 @@ service rmt_storage /system/bin/rmt_storage /dev/block/mmcblk0p25 /dev/block/mmc
 on property:ro.emmc=1
     start rmt_storage
 
-service modem /system/bin/wireless_modem
-    user system
-    group system radio
-    disabled
-
-on property:service.modem.enable=1
-    start modem
-
-on property:service.modem.enable=0
-    stop modem
-
 service hdmid /system/bin/hdmid
     class late_start
     socket hdmid stream 0660 root system graphics
@@ -311,27 +300,10 @@ service qcom-post-boot /system/bin/sh /system/etc/init.qcom.post_boot.sh
     class main
     user root
     disabled
+    oneshot
 
 on property:init.svc.bootanim=stopped
     start qcom-post-boot
-
-service htc_ebdlogd /system/bin/htc_ebdlogd -s -k -P 7 -n 10 -N 10
-    user root
-    disabled
-    oneshot
-    ioprio idle 0
-
-service htc_ebdlogd_rel /system/bin/htc_ebdlogd -s -k -n 10 -N 10
-    user root
-    disabled
-    oneshot
-    ioprio idle 0
-
-on property:ro.build.tags=test-keys
-    start htc_ebdlogd
-
-on property:ro.build.tags=release-keys
-    start htc_ebdlogd_rel
 
 # QMUX must be in multiple groups to support external process connections
 service qmuxd /system/bin/qmuxd
