@@ -21,6 +21,10 @@
      for different hardware and product builds. -->
 <resources>
 
+    <!-- Boolean indicating if current platform supports quick switch-on/off of
+         Bluetooth module -->
+    <bool name="config_bluetooth_adapter_quick_switch">false</bool>
+
     <!-- Indicate whether the lid state impacts the accessibility of
          the physical keyboard.  0 means it doesn't, 1 means it is accessible
          when the lid is open, 2 means it is accessible when the lid is
@@ -47,12 +51,6 @@
          AC.  0 will not keep it on; or together 1 to stay on when plugged
          in to AC and 2 to stay on when plugged in to USB.  (So 3 for both.) -->
     <integer name="config_deskDockKeepsScreenOn">0</integer>
-
-    <!-- Component name of the service providing network location support. -->
-    <string name="config_networkLocationProvider">com.google.android.location.NetworkLocationProvider</string>
-
-    <!-- Component name of the service providing geocoder API support. -->
-    <string name="config_geocodeProvider">com.google.android.location.GeocodeProvider</string>
 
     <!-- Flag indicating whether we should enable the automatic brightness in Settings.
          config_hardware_automatic_brightness_available is not set, so we will use software implementation -->
@@ -85,15 +83,15 @@
          than the size of the config_autoBrightnessLevels array.
     -->
     <integer-array name="config_autoBrightnessLcdBacklightValues">
-        <item>1</item>
-        <item>39</item>
-        <item>58</item>
-        <item>86</item>
-        <item>128</item>
-        <item>163</item>
-        <item>186</item>
-        <item>208</item>
-        <item>231</item>
+        <item>56</item>
+        <item>56</item>
+        <item>56</item>
+        <item>90</item>
+        <item>117</item>
+        <item>142</item>
+        <item>170</item>
+        <item>198</item>
+        <item>227</item>
         <item>255</item>
     </integer-array>
 
@@ -205,17 +203,7 @@
     <!-- Enables or disables fading edges when marquee is enabled in TextView. -->
     <bool name="config_ui_enableFadingMarquee">false</bool>
 
-    <!-- Component name of the service providing network location support. -->
-    <string name="config_networkLocationProvider">com.google.android.location.NetworkLocationProvider</string>
-
-    <!-- Component name of the service providing geocoder API support. -->
-    <string name="config_geocodeProvider">com.google.android.location.GeocodeProvider</string>
-
     <!-- Is the notification LED intrusive? Used to decide if there should be a disable option -->
-    <bool name="config_intrusiveNotificationLed">false</bool>
-
-    <!-- Component name of the default wallpaper. This will be ImageWallpaper if not
-         specified -->
-    <string name="default_wallpaper_component">com.android.phasebeam/.PhaseBeamWallpaper</string>
+    <!-- <bool name="config_intrusiveNotificationLed">false</bool> -->
 
 </resources>

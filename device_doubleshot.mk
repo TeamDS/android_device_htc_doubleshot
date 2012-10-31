@@ -25,12 +25,9 @@ DEVICE_PACKAGE_OVERLAYS += device/htc/doubleshot/overlay
 # GPS and Light
 PRODUCT_PACKAGES += \
     gps.doubleshot \
-    lights.doubleshot \
-    sensors.doubleshot
+    lights.doubleshot
 
-# Wifi Calling
-PRODUCT_PACKAGES += \
-    GanOptimizer
+#   sensors.doubleshot
 
 ## The gps config appropriate for this device
 PRODUCT_COPY_FILES += device/common/gps/gps.conf_US:system/etc/gps.conf
@@ -44,6 +41,7 @@ $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4329
 
 # Boot ramdisk setup
 PRODUCT_COPY_FILES += \
+	device/htc/doubleshot/ramdisk/fstab.doubleshot:root/fstab.doubleshot \
 	device/htc/doubleshot/ramdisk/init.doubleshot.rc:root/init.doubleshot.rc \
 	device/htc/doubleshot/ramdisk/init.doubleshot.usb.rc:root/init.doubleshot.usb.rc \
 	device/htc/doubleshot/ramdisk/ueventd.doubleshot.rc:root/ueventd.doubleshot.rc
@@ -110,10 +108,11 @@ PRODUCT_COPY_FILES += \
 
 # Permissions
 PRODUCT_COPY_FILES += \
-    frameworks/base/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml
+    frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml
 
 # Custom media config for HTC camera
 PRODUCT_COPY_FILES += \
+    device/htc/msm8660-common/configs/media_codecs.xml:system/etc/media_codecs.xml \
     device/htc/doubleshot/configs/media_profiles.xml:system/etc/media_profiles.xml
 
 ## misc
@@ -122,6 +121,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.lockprof.threshold=500 \
     ro.com.google.locationfeatures=1 \
     dalvik.vm.dexopt-flags=m=y
+
+PRODUCT_COPY_FILES += \
+    device/htc/doubleshot/prebuilt/kernel:kernel \
+    device/htc/doubleshot/prebuilt/bcmdhd.ko:/system/lib/modules/bcmdhd.ko
 
 # call the proprietary setup
 $(call inherit-product-if-exists, vendor/htc/doubleshot/doubleshot-vendor.mk)
@@ -133,4 +136,4 @@ $(call inherit-product, device/htc/doubleshot/media_a1026.mk)
 ## htc audio settings
 $(call inherit-product, device/htc/doubleshot/media_htcaudio.mk)
 
-$(call inherit-product, frameworks/base/build/phone-xhdpi-1024-dalvik-heap.mk)
+$(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)

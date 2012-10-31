@@ -66,10 +66,6 @@ lib/libqdp.so
 lib/libqmi.so
 lib/libqmiservices.so
 lib/libsc-a2xx.so
-lib/libv8.so
 lib/libwebkitaccel.so
+lib/libc2d2_z180.so
 xbin/wireless_modem
-app/HTC-PYRTM-ICS-4.0.1-2.3-49986-4.3.apk
-lib/libganril.so
-lib/libkineto.so
-lib/librilswitch.so
