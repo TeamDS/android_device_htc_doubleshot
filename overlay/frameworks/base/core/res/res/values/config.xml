@@ -31,6 +31,10 @@
          closed.  The default is 1. -->
     <integer name="config_lidKeyboardAccessibility">1</integer>
 
+    <!-- The number of degrees to rotate the display when the keyboard is open.
+         A value of -1 means no change in orientation by default. -->
+    <integer name="config_lidOpenRotation">90</integer>
+
     <!-- Default color for notification LED is green. -->
     <color name="config_defaultNotificationColor">#ff00ff00</color>
 
