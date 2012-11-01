@@ -63,9 +63,9 @@ key 114   VOLUME_DOWN		WAKE
 key 115   VOLUME_UP			WAKE
 key 116   POWER             WAKE
 key 139   MENU
-key 150   FUNC_1
+key 150   F1
 key 158   BACK
-key 183   FUNC_2
+key 183   F2
 key 184   SEARCH
 key 185   BACK
 key 186   HOME
@@ -73,7 +73,7 @@ key 187   MENU
 key 188   SEARCH
 key 211   FOCUS
 key 212   CAMERA
-key 214   FUNC_3
+key 214   SLASH
 key 215   AT
 
 # DPad hack for wake

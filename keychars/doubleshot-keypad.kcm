@@ -342,7 +342,7 @@ key AT {
 	shift+alt:		'~'
 }
 
-key FUNC_1 {
+key F1 {
 	label:			'\uEF04'
 	base:			'\uEF04'
 	shift, capslock:	'\uEF04'
@@ -350,15 +350,15 @@ key FUNC_1 {
 	shift+alt:		'\uEF03'
 }
 
-key FUNC_2 {
-	label:			'?'
+key F2 {
+	label:			'\uEF01'
 	base:			'\uEF01'
 	shift, capslock:	'\uEF01'
 	alt:			'\uEF01'
 	shift+alt:		'\uEF01'
 }
 
-key FUNC_3 {
+key SLASH {
         label:                  '?'
         base:                   '?'
         shift, capslock:        '?'
