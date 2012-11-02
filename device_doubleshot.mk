@@ -122,10 +122,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.com.google.locationfeatures=1 \
     dalvik.vm.dexopt-flags=m=y
 
-PRODUCT_COPY_FILES += \
-    device/htc/doubleshot/prebuilt/kernel:kernel \
-    device/htc/doubleshot/prebuilt/bcmdhd.ko:/system/lib/modules/bcmdhd.ko
-
 # call the proprietary setup
 $(call inherit-product-if-exists, vendor/htc/doubleshot/doubleshot-vendor.mk)
 
