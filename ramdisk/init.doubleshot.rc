@@ -1,6 +1,9 @@
 import init.doubleshot.usb.rc
 
 on early-init
+    # limit 2D GPU clokc to work around random reboots and poweroffs
+    write /sys/devices/platform/kgsl-2d0.0/kgsl/kgsl-2d0/max_gpuclk 160000000
+
     mkdir /storage 0050 system sdcard_r
     mkdir /storage/sdcard0 0000 system system
 
