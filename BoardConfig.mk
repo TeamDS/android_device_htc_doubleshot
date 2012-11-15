@@ -37,7 +37,6 @@ BOARD_KERNEL_BASE := 0x48000000
 BOARD_KERNEL_PAGE_SIZE := 2048
 BOARD_KERNEL_CMDLINE := no_console_suspend=1
 TARGET_KERNEL_CONFIG := doubleshot_defconfig
-TARGET_KERNEL_SOURCE := kernel/htc/doubleshot
 
 # Boot animation
 TARGET_SCREEN_HEIGHT := 800
