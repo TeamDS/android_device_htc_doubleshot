@@ -27,8 +27,6 @@ PRODUCT_PACKAGES += \
     gps.doubleshot \
     lights.doubleshot
 
-#   sensors.doubleshot
-
 ## The gps config appropriate for this device
 PRODUCT_COPY_FILES += device/common/gps/gps.conf_US:system/etc/gps.conf
 
@@ -41,10 +39,10 @@ $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4329
 
 # Boot ramdisk setup
 PRODUCT_COPY_FILES += \
-	device/htc/doubleshot/ramdisk/fstab.doubleshot:root/fstab.doubleshot \
-	device/htc/doubleshot/ramdisk/init.doubleshot.rc:root/init.doubleshot.rc \
-	device/htc/doubleshot/ramdisk/init.doubleshot.usb.rc:root/init.doubleshot.usb.rc \
-	device/htc/doubleshot/ramdisk/ueventd.doubleshot.rc:root/ueventd.doubleshot.rc
+    device/htc/doubleshot/ramdisk/fstab.doubleshot:root/fstab.doubleshot \
+    device/htc/doubleshot/ramdisk/init.doubleshot.rc:root/init.doubleshot.rc \
+    device/htc/doubleshot/ramdisk/init.doubleshot.usb.rc:root/init.doubleshot.usb.rc \
+    device/htc/doubleshot/ramdisk/ueventd.doubleshot.rc:root/ueventd.doubleshot.rc
 
 ## recovery and custom charging
 PRODUCT_COPY_FILES += \
@@ -56,24 +54,24 @@ PRODUCT_COPY_FILES += \
 
 # Some misc configeration files
 PRODUCT_COPY_FILES += \
-	device/htc/doubleshot/vold.fstab:system/etc/vold.fstab
+    device/htc/doubleshot/vold.fstab:system/etc/vold.fstab
 
 # Keylayouts and Keychars
 PRODUCT_COPY_FILES += \
-	device/htc/doubleshot/keylayout/AVRCP.kl:system/usr/keylayout/AVRCP.kl \
-	device/htc/doubleshot/keylayout/doubleshot-keypad.kl:system/usr/keylayout/doubleshot-keypad.kl \
-	device/htc/doubleshot/keylayout/h2w_headset.kl:system/usr/keylayout/h2w_headset.kl \
-	device/htc/doubleshot/keylayout/qwerty.kl:system/usr/keylayout/qwerty.kl \
-	device/htc/doubleshot/keychars/doubleshot-keypad.kcm:system/usr/keychars/doubleshot-keypad.kcm \
-	device/htc/doubleshot/keychars/BT_HID.kcm.bin:system/usr/keychars/BT_HID.kcm.bin \
-	device/htc/doubleshot/keychars/qwerty.kcm:system/usr/keychars/qwerty.kcm \
-	device/htc/doubleshot/keychars/qwerty2.kcm:system/usr/keychars/qwerty2.kcm
+    device/htc/doubleshot/keylayout/AVRCP.kl:system/usr/keylayout/AVRCP.kl \
+    device/htc/doubleshot/keylayout/doubleshot-keypad.kl:system/usr/keylayout/doubleshot-keypad.kl \
+    device/htc/doubleshot/keylayout/h2w_headset.kl:system/usr/keylayout/h2w_headset.kl \
+    device/htc/doubleshot/keylayout/qwerty.kl:system/usr/keylayout/qwerty.kl \
+    device/htc/doubleshot/keychars/doubleshot-keypad.kcm:system/usr/keychars/doubleshot-keypad.kcm \
+    device/htc/doubleshot/keychars/BT_HID.kcm.bin:system/usr/keychars/BT_HID.kcm.bin \
+    device/htc/doubleshot/keychars/qwerty.kcm:system/usr/keychars/qwerty.kcm \
+    device/htc/doubleshot/keychars/qwerty2.kcm:system/usr/keychars/qwerty2.kcm
 
 # Input device config
 PRODUCT_COPY_FILES += \
-	device/htc/doubleshot/idc/atmel-touchscreen.idc:system/usr/idc/atmel-touchscreen.idc \
-	device/htc/doubleshot/idc/curcial-oj.idc:system/usr/idc/curcial-oj.idc \
-	device/htc/doubleshot/idc/synaptics-rmi-touchscreen.idc:system/usr/idc/synaptics-rmi-touchscreen.idc
+    device/htc/doubleshot/idc/atmel-touchscreen.idc:system/usr/idc/atmel-touchscreen.idc \
+    device/htc/doubleshot/idc/curcial-oj.idc:system/usr/idc/curcial-oj.idc \
+    device/htc/doubleshot/idc/synaptics-rmi-touchscreen.idc:system/usr/idc/synaptics-rmi-touchscreen.idc
 
 # HTC BT Audio tune
 PRODUCT_COPY_FILES += device/htc/doubleshot/configs/AudioBTID.csv:system/etc/AudioBTID.csv
@@ -124,7 +122,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # call the proprietary setup
 $(call inherit-product-if-exists, vendor/htc/doubleshot/doubleshot-vendor.mk)
-
 
 # media profiles and capabilities spec
 $(call inherit-product, device/htc/doubleshot/media_a1026.mk)
