@@ -27,9 +27,6 @@ PRODUCT_PACKAGES += \
     gps.doubleshot \
     lights.doubleshot
 
-## The gps config appropriate for this device
-PRODUCT_COPY_FILES += device/common/gps/gps.conf_US:system/etc/gps.conf
-
 # Bluetooth
 PRODUCT_COPY_FILES += \
     device/htc/msm8660-common/firmware/bcm4329.hcd:system/vendor/firmware/bcm4329.hcd
