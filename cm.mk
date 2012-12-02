@@ -16,7 +16,7 @@ $(call inherit-product, device/htc/doubleshot/device_doubleshot.mk)
 PRODUCT_DEVICE := doubleshot
 PRODUCT_NAME := cm_doubleshot
 PRODUCT_BRAND := htc
-PRODUCT_MODEL := myTouch_4G_Slide
+PRODUCT_MODEL := MyTouch 4G Slide
 PRODUCT_MANUFACTURER := HTC
 
 # Set build fingerprint / ID / Product Name ect.
