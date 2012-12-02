@@ -22,10 +22,9 @@ $(call inherit-product, device/htc/msm8660-common/msm8660.mk)
 
 DEVICE_PACKAGE_OVERLAYS += device/htc/doubleshot/overlay
 
-# GPS and Light
+# GPS
 PRODUCT_PACKAGES += \
-    gps.doubleshot \
-    lights.doubleshot
+    gps.doubleshot
 
 # Wifi
 $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4329/device-bcm.mk)
