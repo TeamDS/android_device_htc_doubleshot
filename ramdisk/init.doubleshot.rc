@@ -196,16 +196,15 @@ on boot
 
 # Services start here
 
-service dhcpcd_wlan0 /system/bin/dhcpcd -ABKL
-    class main
-    disabled
-    oneshot
-
-# compass/accelerometer daemon
 service akmd /system/bin/akmd
     class core
     user compass
     group compass misc input
+
+service dhcpcd_wlan0 /system/bin/dhcpcd -ABKL
+    class main
+    disabled
+    oneshot
 
 service hciattach /system/bin/brcm_patchram_plus --enable_hci \
         --tosleep 50000 --baudrate 3000000 --use_baudrate_for_download \
