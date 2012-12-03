@@ -1,7 +1,7 @@
 import init.doubleshot.usb.rc
 
 on early-init
-    # limit 2D GPU clokc to work around random reboots and poweroffs
+    # limit 2D GPU clock to work around random reboots and poweroffs
     write /sys/devices/platform/kgsl-2d0.0/kgsl/kgsl-2d0/max_gpuclk 160000000
 
     mkdir /storage 0050 system sdcard_r
@@ -23,6 +23,7 @@ on early-init
     wait /dev/block/mmcblk0p17
     wait /dev/block/mmcblk0p19
     mount vfat /dev/block/mmcblk0p17 /vendor/firmware/misc ro shortname=lower
+
     symlink /vendor/firmware/misc/q6.b07 /vendor/firmware/q6.b07
     symlink /vendor/firmware/misc/q6.b06 /vendor/firmware/q6.b06
     symlink /vendor/firmware/misc/q6.b05 /vendor/firmware/q6.b05
@@ -76,8 +77,6 @@ on post-fs-data
     # double check the perms and set owner
     chown root root /devlog
     chmod 0700 /devlog
-
-	mount rootfs rootfs / remount
 
     # Set indication (checked by vold) that we have finished this action
     setprop vold.post_fs_data_done 1
