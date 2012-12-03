@@ -54,8 +54,8 @@ on early-fs
     mkdir /cache 0770 system cache
     mkdir /devlog 0700 root root
 
-#on emmc-fs
-#    mount_all /fstab.pyramid
+on emmc-fs
+    mount_all /fstab.doubleshot
 
     setprop ro.crypto.tmpfs_options size=128m,mode=0771,uid=1000,gid=1000
 
@@ -66,12 +66,6 @@ on early-fs
 
     mkdir /vendor/etc 0771 system system
     symlink /system/vendor/etc/audio_effects.conf /vendor/etc/audio_effects.conf
-
-    mount ext4 /dev/block/mmcblk0p22 /system wait ro data=ordered noauto_da_alloc
-    setprop ro.crypto.tmpfs_options size=128m,mode=0771,uid=1000,gid=1000
-    mount ext4 /dev/block/mmcblk0p23 /data wait noatime nosuid nodev data=ordered noauto_da_alloc
-    mount ext4 /dev/block/mmcblk0p24 /cache wait noatime nosuid nodev data=ordered noauto_da_alloc
-    mount ext4 /dev/block/mmcblk0p27 /devlog wait noatime nosuid nodev data=ordered noauto_da_alloc
 
 on post-fs-data
     # double check the perms and set owner
