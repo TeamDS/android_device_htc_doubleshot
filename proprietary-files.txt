@@ -6,31 +6,20 @@ etc/vpimg
 bin/akmd
 bin/awb_camera
 bin/bma150_usr
-bin/btld
-bin/cam_ins_spmo
 bin/charging
-bin/hdmid
-bin/htc_ebdlogd
 bin/htcbatt
 bin/ipd
-bin/logcat2
-bin/lsc_camera
+bin/mpdecision
 bin/netmgrd
 bin/netsharing
 bin/qmuxd
 bin/rmt_storage
-bin/ser2net
-bin/snd
-bin/snd8k
-bin/sound8x60
-bin/usbnet
-xbin/wireless_modem
+bin/thermald
 
 # Audio
 lib/libacdbloader.so
 lib/libacdbmapper.so
 lib/libaudcal.so
-lib/libaudcalwb.so
 lib/libaudioalsa.so
 lib/libhtc_acoustic.so
 
@@ -72,7 +61,6 @@ lib/libsc-a2xx.so
 
 # Misc libraries
 lib/libmm-color-convertor.so
-lib/libwebkitaccel.so
 
 # Radio
 lib/libdiag.so
@@ -84,9 +72,3 @@ lib/libnetmgr.so
 lib/libqdp.so
 lib/libqmi.so
 lib/libqmiservices.so
-
-# Sensors
-lib/libmllite.so
-lib/libmlplatform.so
-lib/libmpl.so
-lib/libmpl_jni.so
