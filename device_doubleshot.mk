@@ -26,10 +26,6 @@ DEVICE_PACKAGE_OVERLAYS += device/htc/doubleshot/overlay
 PRODUCT_PACKAGES += \
     gps.doubleshot
 
-# Sensors
-PRODUCT_PACKAGES += \
-    sensors.doubleshot
-
 # Wifi
 $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4329/device-bcm.mk)
 

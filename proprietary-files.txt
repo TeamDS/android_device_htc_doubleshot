@@ -72,3 +72,6 @@ lib/libnetmgr.so
 lib/libqdp.so
 lib/libqmi.so
 lib/libqmiservices.so
+
+# Sensor blob from CM9 to avoid bootloop
+lib/hw/sensors.doubleshot.so
