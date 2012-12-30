@@ -106,8 +106,8 @@ key B {
 	label:			'B'
 	base:			'b'
 	shift, capslock:	'B'
-	alt:			'+'
-	shift+alt:		'+'
+	alt:			'b'
+	shift+alt:		'B'
 }
 
 key C {
@@ -342,7 +342,7 @@ key AT {
 	shift+alt:		'~'
 }
 
-key F1 {
+key FUNC_1 {
 	label:			'\uEF04'
 	base:			'\uEF04'
 	shift, capslock:	'\uEF04'
@@ -350,15 +350,15 @@ key F1 {
 	shift+alt:		'\uEF03'
 }
 
-key F2 {
-	label:			'\uEF01'
+key FUNC_2 {
+	label:			'?'
 	base:			'\uEF01'
 	shift, capslock:	'\uEF01'
 	alt:			'\uEF01'
 	shift+alt:		'\uEF01'
 }
 
-key SLASH {
+key FUNC_3 {
         label:                  '?'
         base:                   '?'
         shift, capslock:        '?'
