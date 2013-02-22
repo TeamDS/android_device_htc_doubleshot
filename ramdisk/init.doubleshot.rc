@@ -54,7 +54,7 @@ on early-fs
     mkdir /cache 0770 system cache
     mkdir /devlog 0700 root root
 
-on emmc-fs
+on fs
     mount_all /fstab.doubleshot
 
     setprop ro.crypto.tmpfs_options size=128m,mode=0771,uid=1000,gid=1000
@@ -63,6 +63,8 @@ on emmc-fs
     symlink /system/vendor/firmware/fw_bcmdhd_apsta.bin /vendor/firmware/fw_bcmdhd_apsta.bin
     symlink /system/vendor/firmware/fw_bcmdhd_p2p.bin /vendor/firmware/fw_bcmdhd_p2p.bin
     symlink /system/vendor/firmware/bcm4329.hcd /vendor/firmware/bcm4329.hcd
+
+    symlink /system/vendor/lib /vendor/lib
 
     mkdir /vendor/etc 0771 system system
     symlink /system/vendor/etc/audio_effects.conf /vendor/etc/audio_effects.conf
@@ -208,12 +210,11 @@ service dhcpcd_wlan0 /system/bin/dhcpcd -ABKL
 
 service hciattach /system/bin/brcm_patchram_plus --enable_hci \
         --tosleep 50000 --baudrate 3000000 --use_baudrate_for_download \
-        --enable_lpm --patchram /vendor/firmware/bcm4329.hcd /dev/ttyHS0
+        --patchram /vendor/firmware/bcm4329.hcd /dev/ttyHS0
     class main
     user bluetooth
     group bluetooth net_bt_admin
     disabled
-    oneshot
 
 service hdmid /system/bin/hdmid
     class main

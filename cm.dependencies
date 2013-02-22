@@ -2,9 +2,5 @@
   {
     "repository": "android_device_htc_msm8660-common",
     "target_path": "device/htc/msm8660-common"
-  },
-  {
-    "repository": "android_kernel_htc_msm8660",
-    "target_path": "kernel/htc/doubleshot"
   }
 ]
